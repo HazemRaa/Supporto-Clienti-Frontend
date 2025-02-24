@@ -1,0 +1,93 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #000000;
+}
+
+
+.Registrazione {    
+    background-color: rgb(204, 198, 129);
+    border-radius: 10px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    padding: 30px;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 15px;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus {
+    background-color: #ccc;
+    outline: none;
+}
+
+.btn {
+      
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;   
+    transition: all 0.10s ease;
+}
+
+.btn:hover {
+
+    background-color: #03558b;
+    transform: translateX(4px);
+    box-shadow: 5px 5px 0px rgb(66, 66, 66);
+}
+
+
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+.text-center {
+    font-size: 14px;
+    color: #555;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .Registrazione {
+        width: 90%;
+        padding: 20px;
+    }
+}
