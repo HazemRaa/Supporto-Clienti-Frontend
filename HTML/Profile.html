@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../CSS/Profile.css">
+   
+
+    <title>Profile</title>
+</head>
+<body>
+    
+    <div class="card-profile"> 
+            <h1>Profile</h1>
+
+        <div class="profile">
+            
+            <label for="nome-edit"><b>Nome:</b></label>
+            <input type="text" id="nome-edit" style="display: none;">
+        </div>
+
+        <div class="profile">
+            <label for="cognome-edit"><b>Cognome:</b></label>
+            <input type="text" id="cognome-edit" style="display: none;"> 
+        </div>
+
+        <div class="profile">
+            <label for="email"><b>E-mail:</b></label>
+            <input type="text" id="email-edit" style="display: none;">
+        </div>
+
+        <div class="profile">
+           
+            <input type="text" id="password-edit" style="display: none;">
+        </div>
+        
+        
+        <div class="profile">
+            
+            <button class="Ticket" id="ticket-btn" onclick="goToTickets()">I miei ticket</button>
+            <button class="edit-btn" id="edit-brn" onclick="editProfile()">Modifica Profilo</button>
+            <button class="edit-btn" id="save-btn" onclick="saveProfile()" style="display: none;" >Salva</button>
+            <button class="delete-btn" id="delete-btn" onclick="deleteAccount()">Elimina Profilo</button>
+        </div>
+    </div>
+    <script src="./JavaS/Profile.js" defer></script>
+    <!-- Pulsante Home -->
+<div class="home-button">
+    <a href="../HTML/Home.html" class="btn-home">Home</a>
+</div>
+
+</body>
+</html>
