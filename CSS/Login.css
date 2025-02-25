@@ -14,7 +14,7 @@ body {
 /* Contenitore principale */
 .container {
     background: rgba(0, 0, 0, 0.7);
-    padding: 30px 40px;
+    padding: 20px 30px; /* Ridotto il padding */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     width: 350px;
@@ -28,18 +28,57 @@ h1 {
     color: #fff;
 }
 
+/* Form */
+form {
+    margin-top: 20px; /* Aggiunto margine superiore */
+}
+
 /* Input stile */
 input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 10px 15px;
-    margin: 10px 0;
+    margin: 10px 0 20px 0; /* Aggiunto margine inferiore */
     border: none;
     border-radius: 5px;
     background: #f1f1f1;
     color: #333;
     font-size: 16px;
 }
+
+/* Bottone */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #ffaa00;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px; /* Aggiunto margine superiore */
+}
+
+button:hover {
+    background: #ff6a00;
+}
+
+/* Link registrazione */
+p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+p a {
+    color: #ffaa00;
+    text-decoration: none;
+}
+
+p a:hover {
+    color: #ff6a00;
+}
+
 /* Pulsante Home */
 .home-button {
     position: absolute;
@@ -61,37 +100,6 @@ input[type="password"] {
 
 .btn-home:hover {
     background: #ff6a00;
-}
-/* Bottone */
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #ffaa00;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background: #ff6a00;
-}
-
-/* Link registrazione */
-p {
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-p a {
-    color: #ffaa00;
-    text-decoration: none;
-}
-
-p a:hover {
-    color: #ff6a00;
 }
 
 /* Footer */
