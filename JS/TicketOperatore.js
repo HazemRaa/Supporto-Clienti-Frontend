@@ -9,19 +9,18 @@ ripete per ogni ticket presente
 
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
-    const ruolo = localStorage.getItem("ruolo");
+    const token = localStorage.getItem("authToken");
 
     try {
         const response = await fetch(URL, {
             headers: {
-                "Authorization" : "6ad0c906-8dff-4916-9150-0958d7111fac"
+                "Authorization" : token
             }
         });
         if (!response.ok) {
             throw new Error("Errore nel recupero dei ticket");
           }
     const dati = await response.json();
-       
 var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
@@ -48,40 +47,41 @@ var num = 1;
 
         const oggetto = document.createElement("td");
         oggetto.id = "oggetto_ticket";
-        oggetto.textContent = ticket.oggetto;
-        
-        console.log(ticket.oggetto);
-        console.log(ticket);
+        oggetto.textContent = ticket.oggetto;   
        
         tr.appendChild(numero);
         tr.appendChild(utente);
         tr.appendChild(data_ap);
         tr.appendChild(data_chi);
         tr.appendChild(oggetto);
-
-        //Aggiunta bottone
+//Aggiunta bottone
         
-            const stato = document.createElement("select");
-            const bottoncino = document.getElementById("bottoncino");
-          
-            stato.id = "stato_ticket";
-            stato.classList.add("btn", "btn-primary", "stato");
-          
-            const stati = ["NUOVO", "APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
-          
-            stati.forEach(status => {
-              const stato_btn = document.createElement("option");
-              stato_btn.value = status;
-              stato_btn.textContent = status;
-              stato.appendChild(stato_btn);
-            });
-          
-            stato.value = ticket.status;
-          
-            bottoncino.appendChild(stato);
-            tr.appendChild(bottoncino);
-          
-   });
+const stato = document.createElement("select");
+const th = document.createElement("th");
+
+stato.id = "stato_ticket" + num;
+const temp = num;
+console.log(ticket.categoriaTicket)
+stato.addEventListener("change", () => {
+    modificaStato(ticket.id, temp, ticket.categoriaTicket.id)}
+);
+stato.classList.add("btn", "btn-primary", "stato");
+
+const stati = ["APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
+
+stati.forEach(status => {
+  const stato_btn = document.createElement("option");
+  stato_btn.value = status;
+  stato_btn.textContent = status;
+  stato.appendChild(stato_btn);
+});
+
+stato.value = ticket.status;
+
+th.appendChild(stato);
+tr.appendChild(th);
+tbody.appendChild(tr)
+});
 
   } catch (error) {
     console.error("Errore:", error);
@@ -145,29 +145,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // Evento se il bottone è cliccato
-function modificaStato(idTicket) {
-    const stato_btn = document.getElementById("stato_ticket");
-
-    stato_btn.addEventListener("change", () => {
-    console.log("Bottone cliccato!"); //DA TOGLIERE
+function modificaStato(idTicket, num, idCategoria) {
+    const stato_btn = document.getElementById("stato_ticket" + num);
+    const token = localStorage.getItem("authToken");
     const nuovoStato = stato_btn.value;
+    console.log(nuovoStato)
+    console.log(idCategoria)
 
-    fetch(`http://localhost:8080/ticket/${idTicket}`), { //controllare l'url
-    method: "PUT",
-    headers: {
-       
-    },
-    body: JSON.stringify({ stato: nuovoStato})
-    };
+    fetch(`http://localhost:8080/ticket/${idTicket}`, {
+        method: "PUT",
+        headers: {
+            "Authorization" : token,
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify({
+            "status": nuovoStato,
+            "idCategoria": parseInt(idCategoria)
+        })
     })
     .then(response => {
-        if (response.ok) {
-            console.log("Stato aggiornato");
-        } else {
-            console.errore("Errore durante l'aggiornamento");
-        }
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
     })
     .catch(errore => {
-        console.errore("Errore" + error);
+        console.error("Errore" + errore);
     });
 };

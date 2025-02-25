@@ -146,3 +146,15 @@ body {
         padding: 10px;
     }
 }
+.stato {
+    font-size: .55rem;
+    border-radius: .99rem;
+    border-radius: .99rem;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+@media screen and (max-width: 600px) {
+    .data-tb {
+      display: none;
+    }
+  }

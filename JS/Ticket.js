@@ -1,20 +1,23 @@
-* Prende l'id dell'utente e il token
+/* Prende l'id dell'utente e il token
 prende gli id ticket associati all'id utente
 stampa i dettagli dell'id ticket
 ripete per ogni ticket presente
 */
 
+// Controlla se c'e il token 
+    // Se si vabene
+    // Se no rimanda -> Login
+
+
 // funzione per caricare i ticket associati all'id
-
-
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
-    const ruolo = localStorage.getItem("ruolo");
+    const token = localStorage.getItem("authToken");
 
     try {
         const response = await fetch(URL, {
             headers: {
-                "Authorization" : "6ad0c906-8dff-4916-9150-0958d7111fac"
+                "Authorization" : token
             }
         });
         if (!response.ok) {
@@ -34,12 +37,12 @@ var num = 1;
 
         const data_ap = document.createElement("td");
         data_ap.id = "data_ticket_ap";
-        data_ap.textContent = "12-12-2012";
+        data_ap.textContent = ticket.dataApertura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
         data_chi.id = "data_ticket_chi";
-        data_chi.textContent = "14-12-2012";
+        data_chi.textContent = ticket.dataChiusura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
