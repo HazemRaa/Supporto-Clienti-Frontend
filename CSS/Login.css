@@ -14,7 +14,7 @@ body {
 /* Contenitore principale */
 .container {
     background: rgba(0, 0, 0, 0.7);
-    padding: 20px 30px; /* Ridotto il padding */
+    padding: 30px; /* Padding uniforme su tutti i lati */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     width: 350px;
@@ -30,15 +30,18 @@ h1 {
 
 /* Form */
 form {
-    margin-top: 20px; /* Aggiunto margine superiore */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra gli elementi del form */
+    width: 100%; /* Occupa tutta la larghezza del container */
 }
 
 /* Input stile */
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: calc(100% - 30px); /* Larghezza piena meno il padding */
     padding: 10px 15px;
-    margin: 10px 0 20px 0; /* Aggiunto margine inferiore */
+    margin: 10px 0; /* Spaziatura verticale */
     border: none;
     border-radius: 5px;
     background: #f1f1f1;
@@ -48,7 +51,7 @@ input[type="password"] {
 
 /* Bottone */
 button {
-    width: 100%;
+    width: calc(100% - 30px); /* Larghezza piena meno il padding */
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -57,7 +60,7 @@ button {
     font-size: 18px;
     cursor: pointer;
     transition: background 0.3s;
-    margin-top: 10px; /* Aggiunto margine superiore */
+    margin-top: 10px; /* Spaziatura superiore */
 }
 
 button:hover {
