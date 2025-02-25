@@ -1,0 +1,42 @@
+h1 {
+   text-align: center;
+   font-size: 50px;
+}
+
+.box-form {
+    margin-top: 50px;
+
+}
+
+.submit {
+   padding: 20px;
+}
+
+.titolo {
+    background-color: rgb(252, 169, 53);
+    border: 50px solid rgb(252, 169, 53);
+    margin-bottom: 50px;
+    /* 255, 189, 59
+    249, 149, 49
+
+    sfondo
+    247, 244, 248
+    */
+}
+
+.blocco-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-form {
+    width: 80%;
+}
+
+.btn {
+   width: 200px;
+   font-size: 20px;
+}
+
+/* da centrare trattamento dati e bottone */
