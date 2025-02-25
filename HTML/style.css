@@ -16,6 +16,7 @@ body {
 
 /* Header */
 header {
+    position: relative;
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: #fff;
     padding: 80px 20px;
@@ -36,47 +37,53 @@ header p {
     opacity: 0.85;
 }
 
+/* Bottone login */
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #ffaa00;
+    transform: scale(1.1);
+}
+
 /* Animazione di fade-in */
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-/* Barra di ricerca */
-.search-bar {
+/* Sezione Apri Ticket */
+.open-ticket {
     margin: 40px auto;
-    width: 90%;
-    max-width: 600px;
     text-align: center;
 }
 
-.search-bar input {
-    width: 80%;
-    padding: 15px;
-    border: 2px solid #007bff;
-    border-radius: 6px;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.search-bar input:focus {
-    border-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.search-bar button {
-    padding: 15px 25px;
+.open-ticket-btn {
+    display: inline-block;
+    padding: 15px 30px;
     background-color: #007bff;
-    border: none;
-    border-radius: 6px;
     color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease;
+    border-radius: 30px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.search-bar button:hover {
+.open-ticket-btn i {
+    margin-right: 10px;
+}
+
+.open-ticket-btn:hover {
     background-color: #0056b3;
     transform: scale(1.1);
 }
