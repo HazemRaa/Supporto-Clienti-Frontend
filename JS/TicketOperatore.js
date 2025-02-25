@@ -1,4 +1,12 @@
-* Prende l'id dell'utente e il token
+
+/*
+// Evento se il bottone è cliccato da modificare solo per OPERATORE
+stato_btn.addEventListener("click", () => {
+  console.log("Bottone cliccato!");
+})
+*/
+
+/* Prende l'id dell'utente e il token
 prende gli id ticket associati all'id utente
 stampa i dettagli dell'id ticket
 ripete per ogni ticket presente

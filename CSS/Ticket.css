@@ -19,9 +19,7 @@ h1 {
 background-color: rgb(173, 216, 230, 0.3);
 }
 
-.tabella {
-    border: 2px solid lightblue;
-}
+
 
 .blocco-body {
     margin-left: 10%;
@@ -39,7 +37,7 @@ background-color: rgb(173, 216, 230, 0.3);
 }
 
 .dropdown-item.active {
-    background-color: #007bff; /* Blu Bootstrap */
+    background-color: #007bff; 
     color: white;
     font-weight: bold;
 }
