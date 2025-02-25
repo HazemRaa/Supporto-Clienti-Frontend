@@ -72,7 +72,28 @@ body {
 .btn-primary:hover {
     background-color: #ffcc00;
 }
+/* Pulsante Home */
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 
+.btn-home {
+    background: #ffaa00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-home:hover {
+    background: #ff6a00;
+}
 /* Responsività */
 @media (max-width: 768px) {
     .titolo-form {

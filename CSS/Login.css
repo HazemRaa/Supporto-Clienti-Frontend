@@ -40,7 +40,28 @@ input[type="password"] {
     color: #333;
     font-size: 16px;
 }
+/* Pulsante Home */
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 
+.btn-home {
+    background: #ffaa00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-home:hover {
+    background: #ff6a00;
+}
 /* Bottone */
 button {
     width: 100%;

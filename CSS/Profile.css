@@ -1,126 +1,143 @@
+/* Background generale */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffcc00, #ff6a00);
+    color: #fff;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    color: #000000;
+}
+/* Pulsante Home */
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
+.btn-home {
+    background: #ffaa00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
+.btn-home:hover {
+    background: #ff6a00;
+}
+/* Contenitore principale */
 .card-profile {
-    width: 50%;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 10px 8px rgba(157, 157, 157, 0.1);
-}
-
-h1 {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-
-.profile {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    display: block;
-}
-
-input[type="text"] {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 5px;
-    display: block;
+    max-width: 500px;
+    text-align: center;
 }
 
+/* Titolo */
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #fff;
+}
 
+/* Sezione profilo */
+.profile {
+    margin-bottom: 15px;
+    text-align: left;
+}
 
-button {
-    
-    font-weight: bold;
-    text-align: center;
+.profile label {
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile input {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.profile input:focus {
+    background: #fff;
+    outline: none;
+}
+
+/* Pulsanti */
+.Ticket,
+.edit-btn,
+.delete-btn {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
-    color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 10px;   
-    transition: all 0.10s ease;
-    
+    transition: background 0.3s;
+    margin-top: 10px;
 }
 
-
-button.Ticket, button.edit-btn, button.delete-btn {
-    width: 30%; 
-    margin-bottom: 10px;
-    justify-content: space-between;
-    
+.Ticket {
+    background: #ffaa00;
+    color: white;
 }
 
-button.Ticket {
-    background-color: #3498db;
-    transform: translateX(4px);
+.Ticket:hover {
+    background: #ff6a00;
 }
 
-button.edit-btn {
-    background-color: #2ecc71;
-    transform: translateX(4px);
+.edit-btn {
+    background: #28a745;
+    color: white;
 }
 
-button.delete-btn {
-    background-color: #e74c3c;
-    transform: translateX(4px);
+.edit-btn:hover {
+    background: #218838;
 }
 
-button.Ticket:hover {
-    background-color: #0166ae;
-    color:#ffffff;
-    border: 2px solid rgb(51, 139, 216);
-    box-shadow: 5px 5px 0px rgb(66, 66, 66);
+.delete-btn {
+    background: #dc3545;
+    color: white;
 }
 
-button.edit-btn:hover {
-    background-color: #27ae60;
-    color:#ffffff;
-    border: 2px solid rgb(74, 230, 173);
-    box-shadow: 5px 5px 0px rgb(66, 66, 66);
+.delete-btn:hover {
+    background: #c82333;
 }
 
-button.delete-btn:hover {
-    background-color: #c0392b;
-    color:#ffffff;
-    border: 2px solid rgb(255, 0, 0);
-    box-shadow: 5px 5px 0px rgb(66, 66, 66);
-}
-
-#email-edit, #nome-edit, #cognome-edit, #password-edit, #nomeUtente-edit {
-    display: none;
-}
-
-#edit-btn {
-    display: none;
-}
-
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 480px) {
     .card-profile {
-        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .profile input {
+        font-size: 14px;
+    }
+
+    .Ticket,
+    .edit-btn,
+    .delete-btn {
+        font-size: 14px;
     }
 }
