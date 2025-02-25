@@ -1,5 +1,5 @@
-* Prende l'id dell'utente e il token
-prende gli id ticket associati all'id utente
+/* Prende l'id dell'utente e il token
+prende gli id ticket associati all'id operatore
 stampa i dettagli dell'id ticket
 ripete per ogni ticket presente
 */
@@ -26,20 +26,27 @@ var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
         numero.id = "id_ticket";
-        numero.textContent = num;
-        num += 1;
+        numero.textContent = ticket.id;
 
         const tr = document.createElement("tr");
         tr.id = "riga";
 
+        const utente = document.createElement("td");
+        utente.id = "utente_ticket";
+        utente.textContent = ticket.utente.nome;
+
+        const operatore = document.createElement("td");
+        operatore.id = "operatore_ticket";
+        operatore.textContent = ticket.operatore.nome;
+
         const data_ap = document.createElement("td");
         data_ap.id = "data_ticket_ap";
-        data_ap.textContent = "12-12-2012";
+        data_ap.textContent = ticket.data_chiusura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
         data_chi.id = "data_ticket_chi";
-        data_chi.textContent = "14-12-2012";
+        data_chi.textContent = ticket.data_apertura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
@@ -50,22 +57,33 @@ var num = 1;
         console.log(ticket);
        
         tr.appendChild(numero);
+        tr.appendChild(utente);
         tr.appendChild(data_ap);
         tr.appendChild(data_chi);
         tr.appendChild(oggetto);
 
         //Aggiunta bottone
-        const stato = document.createElement("td");
-        const stato_btn = document.createElement("button");
-        stato.id = "stato_ticket";
-        stato_btn.classList.add("btn", "btn-primary", "stato"); 
-        stato_btn.textContent = ticket.status;
-        stato.appendChild(stato_btn);
-        tr.appendChild(stato);
-        aggiornaColoreBottone(stato_btn);
-
-        const tbody=document.getElementById("tbody");
-        tbody.appendChild(tr);
+        
+            const stato = document.createElement("select");
+            const bottoncino = document.getElementById("bottoncino");
+          
+            stato.id = "stato_ticket";
+            stato.classList.add("btn", "btn-primary", "stato");
+          
+            const stati = ["NUOVO", "APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
+          
+            stati.forEach(status => {
+              const stato_btn = document.createElement("option");
+              stato_btn.value = status;
+              stato_btn.textContent = status;
+              stato.appendChild(stato_btn);
+            });
+          
+            stato.value = ticket.status;
+          
+            bottoncino.appendChild(stato);
+            tr.appendChild(bottoncino);
+          
    });
 
   } catch (error) {
@@ -128,3 +146,59 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+// Evento se il bottone è cliccato
+function modificaStato(idTicket) {
+    const stato_btn = document.getElementById("stato_ticket");
+
+    stato_btn.addEventListener("change", () => {
+    console.log("Bottone cliccato!"); //DA TOGLIERE
+    const nuovoStato = stato_btn.value;
+
+    fetch(`http://localhost:8080/ticket/${idTicket}`), { //controllare l'url
+    method: "PUT",
+    headers: {
+       
+    },
+    body: JSON.stringify({ stato: nuovoStato})
+    };
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Stato aggiornato");
+        } else {
+            console.errore("Errore durante l'aggiornamento");
+        }
+    })
+    .catch(errore => {
+        console.errore("Errore" + error);
+    });
+};
+
+// Evento se il bottone è cliccato
+function modificaOperatore(idTicket) {
+    const operatore = document.getElementById("id_operatore");
+
+    stato_btn.addEventListener("change", () => {
+    console.log("Bottone cliccato!"); //DA TOGLIERE
+    const nuovoStato = stato_btn.value;
+
+    fetch(`http://localhost:8080/ticket/${idTicket}`), { //controllare l'url
+    method: "PUT",
+    headers: {
+       
+    },
+    body: JSON.stringify({ stato: nuovoStato})
+    };
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Stato aggiornato");
+        } else {
+            console.errore("Errore durante l'aggiornamento");
+        }
+    })
+    .catch(errore => {
+        console.errore("Errore" + error);
+    });
+};

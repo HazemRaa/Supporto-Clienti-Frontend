@@ -1,13 +1,5 @@
-
-/*
-// Evento se il bottone è cliccato da modificare solo per OPERATORE
-stato_btn.addEventListener("click", () => {
-  console.log("Bottone cliccato!");
-})
-*/
-
 /* Prende l'id dell'utente e il token
-prende gli id ticket associati all'id utente
+prende gli id ticket associati all'id operatore
 stampa i dettagli dell'id ticket
 ripete per ogni ticket presente
 */
@@ -42,7 +34,7 @@ var num = 1;
 
         const utente = document.createElement("td");
         utente.id = "utente_ticket";
-        utente.textContent = ticket.utente.nome;
+        utente.textContent = ticket.utente.email;
 
         const data_ap = document.createElement("td");
         data_ap.id = "data_ticket_ap";
@@ -68,17 +60,27 @@ var num = 1;
         tr.appendChild(oggetto);
 
         //Aggiunta bottone
-        const stato = document.createElement("td");
-        const stato_btn = document.createElement("button");
-        stato.id = "stato_ticket";
-        stato_btn.classList.add("btn", "btn-primary", "stato"); 
-        stato_btn.textContent = ticket.status;
-        stato.appendChild(stato_btn);
-        tr.appendChild(stato);
-        aggiornaColoreBottone(stato_btn);
-
-        const tbody=document.getElementById("tbody");
-        tbody.appendChild(tr);
+        
+            const stato = document.createElement("select");
+            const bottoncino = document.getElementById("bottoncino");
+          
+            stato.id = "stato_ticket";
+            stato.classList.add("btn", "btn-primary", "stato");
+          
+            const stati = ["NUOVO", "APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
+          
+            stati.forEach(status => {
+              const stato_btn = document.createElement("option");
+              stato_btn.value = status;
+              stato_btn.textContent = status;
+              stato.appendChild(stato_btn);
+            });
+          
+            stato.value = ticket.status;
+          
+            bottoncino.appendChild(stato);
+            tr.appendChild(bottoncino);
+          
    });
 
   } catch (error) {
@@ -141,3 +143,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+// Evento se il bottone è cliccato
+function modificaStato(idTicket) {
+    const stato_btn = document.getElementById("stato_ticket");
+
+    stato_btn.addEventListener("change", () => {
+    console.log("Bottone cliccato!"); //DA TOGLIERE
+    const nuovoStato = stato_btn.value;
+
+    fetch(`http://localhost:8080/ticket/${idTicket}`), { //controllare l'url
+    method: "PUT",
+    headers: {
+       
+    },
+    body: JSON.stringify({ stato: nuovoStato})
+    };
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Stato aggiornato");
+        } else {
+            console.errore("Errore durante l'aggiornamento");
+        }
+    })
+    .catch(errore => {
+        console.errore("Errore" + error);
+    });
+};
