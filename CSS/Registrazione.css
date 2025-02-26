@@ -1,93 +1,157 @@
-
+/* Background generale */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffcc00, #ff6a00);
+    color: #fff;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    color: #000000;
+}
+/* Pulsante Home */
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
-
-.Registrazione {    
-    background-color: rgb(204, 198, 129);
-    border-radius: 10px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    padding: 30px;
+.btn-home {
+    background: #ffaa00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-home:hover {
+    background: #ff6a00;
+}
+/* Contenitore principale */
+.Registrazione {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
+/* Titolo */
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #fff;
+}
 
+/* Input stile */
 .form-group {
     margin-bottom: 15px;
-}
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"] {
-    width: 100%;
-    padding: 5px;
-    margin-top: 15px;
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 15px;
-    background-color: #f9f9f9;
+    text-align: left;
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus,
-.form-group input[type="email"]:focus {
-    background-color: #ccc;
+.form-control.item,
+.form {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.form-control.item:focus,
+.form:focus {
+    background: #fff;
     outline: none;
 }
 
-.btn {
-      
-    font-weight: bold;
-    text-align: center;
+/* Checkbox */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+label {
+    font-size: 14px;
+    color: #fff;
+}
+
+label a {
+    color: #ffaa00;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+label a:hover {
+    color: #ff6a00;
+}
+
+/* Bottone */
+.create-account {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #3498db;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    background: #ffaa00;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 10px;   
-    transition: all 0.10s ease;
+    transition: background 0.3s;
 }
 
-.btn:hover {
-
-    background-color: #03558b;
-    transform: translateX(4px);
-    box-shadow: 5px 5px 0px rgb(66, 66, 66);
+.create-account:hover {
+    background: #ff6a00;
 }
 
-
-.form-group input[type="checkbox"] {
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-
+/* Link accesso */
 .text-center {
+    margin-top: 15px;
     font-size: 14px;
-    color: #555;
+    color: #fff;
+}
+
+.text-center a {
+    color: #ffaa00;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .text-center a:hover {
-    text-decoration: underline;
+    color: #ff6a00;
 }
 
-@media (max-width: 768px) {
+/* Messaggio campi obbligatori */
+p {
+    font-size: 12px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
     .Registrazione {
-        width: 90%;
         padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .form-control.item,
+    .form {
+        font-size: 14px;
+    }
+
+    .create-account {
+        font-size: 16px;
     }
 }

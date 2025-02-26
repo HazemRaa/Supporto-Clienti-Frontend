@@ -30,7 +30,7 @@ loadProfile();
 
 // function per andare alla pagina miei tickets
 function goToTickets() {
-    window.location.href = "I miei ticket.html"; 
+    window.location.href = "Ticket.html"; 
 }
 
 function editProfile(){
@@ -119,6 +119,8 @@ function editProfile(){
 function deleteAccount() {
     if (!confirm("Vuoi davvero eliminare l'account?")) return;
 
+    const token = localStorage.getItem("authToken");
+    
     fetch("http://localhost:8080/utenti", {
         method: "DELETE",
         headers: {
@@ -131,11 +133,10 @@ function deleteAccount() {
         }
         alert("Account eliminato con successo!");
         localStorage.removeItem("authToken");
+        localStorage.removeItem("userRole")
         window.location.href = "Login.html";
     })
     .catch((error) => {
         console.error("Errore durante l'eliminazione dell'account:", error);
     });
 }
-
-loadProfile();

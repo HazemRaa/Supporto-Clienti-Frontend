@@ -51,7 +51,7 @@ document.getElementById("Registrazione-form").addEventListener("submit" , (event
     })
     .then(data => {
         window.alert("Creazione account avvenuta con successo!");
-        window.location.href = "Home.html";  
+        window.location.href = "home.html";  
     })
     .catch(error => {
         
