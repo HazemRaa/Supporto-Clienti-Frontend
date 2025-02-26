@@ -1,12 +1,21 @@
+
+
+const token = localStorage.getItem("authToken");
+const ruolo = localStorage.getItem("ruolo");
+
+if (token === null) {
+    window.location.href="login.html";
+} else if (ruolo != "Admin") {
+    window.location.href="home.html";
+}
+
+
 /* Prende l'id dell'utente e il token
-prende gli id ticket associati all'id operatore
+prende gli id ticket
 stampa i dettagli dell'id ticket
 ripete per ogni ticket presente
 */
-
 // funzione per caricare i ticket associati all'id
-
-
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
     const ruolo = localStorage.getItem("ruolo");
@@ -25,32 +34,32 @@ async function createTicket() {
 var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
-        numero.id = "id_ticket";
+        numero.id = "id_ticket"+ ticket.id;
         numero.textContent = ticket.id;
 
         const tr = document.createElement("tr");
-        tr.id = "riga";
+        tr.id = "riga"+ ticket.id;
 
         const utente = document.createElement("td");
-        utente.id = "utente_ticket";
-        utente.textContent = ticket.utente.nome;
+        utente.id = "utente_ticket"+ ticket.id;
+        utente.textContent = ticket.utente.email;
 
         const operatore = document.createElement("td");
-        operatore.id = "operatore_ticket";
-        operatore.textContent = ticket.operatore.nome;
+        operatore.id = "operatore_ticket"+ ticket.id;
+        operatore.textContent = utente.nome + " " + utente.cognome;
 
         const data_ap = document.createElement("td");
-        data_ap.id = "data_ticket_ap";
+        data_ap.id = "data_ticket_ap"+ ticket.id;
         data_ap.textContent = ticket.data_chiusura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
-        data_chi.id = "data_ticket_chi";
+        data_chi.id = "data_ticket_chi"+ ticket.id;
         data_chi.textContent = ticket.data_apertura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
-        oggetto.id = "oggetto_ticket";
+        oggetto.id = "oggetto_ticket"+ ticket.id;
         oggetto.textContent = ticket.oggetto;
         
         console.log(ticket.oggetto);
@@ -67,7 +76,7 @@ var num = 1;
             const stato = document.createElement("select");
             const bottoncino = document.getElementById("bottoncino");
           
-            stato.id = "stato_ticket";
+            stato.id = "stato_ticket"+ ticket.id;
             stato.classList.add("btn", "btn-primary", "stato");
           
             const stati = ["NUOVO", "APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
