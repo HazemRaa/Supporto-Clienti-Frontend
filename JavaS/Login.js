@@ -11,11 +11,11 @@ if(token != null){
         event.preventDefault();                                     // Impedisce il refresh della pagina
                                                                     //quando l'utente clicca viene eseguito l'EventListener che eseguirà la funzione
 
-        const username=document.getElementById("username").value.trim();
+        const email=document.getElementById("email").value.trim();
         const password=document.getElementById("password").value.trim();  // Ottenere i valori inseriti dall'utente, trim() rimuove gli spazi aggiunti per sbaglio dall'utente
 
                                                                     
-    if (!username || !password ){
+    if (!email || !password ){
         window.alert("Credenziali non valide");
         return;                                                 //interrompe la richiesta al server controllo se i campi sono vuoti
 
@@ -25,9 +25,9 @@ if(token != null){
                                                                 localhost per verificare le credenziali
                                                                 vengono inviati nel body in formato JSON ( ora sono) */ 
             method: "POST",
-            headers: {"Content-Type": "appliction/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-            "username": username,
+            "email": email,
             "password": password
         }) 
     })
