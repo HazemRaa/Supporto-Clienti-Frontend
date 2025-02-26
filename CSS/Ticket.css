@@ -113,7 +113,7 @@ body {
     color: black;
 }
 
-.table th {
+.table th:not(.stato-th) {
     background: rgba(255, 170, 0, 0.7);
     font-weight: bold;
 }
