@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+}
 
 /* Header */
 header {
@@ -28,11 +36,31 @@ header p {
     opacity: 0.85;
 }
 
+/* Icona login */
+.avatar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.5s ease, color 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.3);
+    color: #ffd700;
+}
 
 /* Animazione di fade-in */
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Sezione Apri Ticket */
@@ -61,47 +89,56 @@ header p {
     transform: scale(1.1);
 }
 
-/* Categorie e articoli */
-.categories, .popular-articles {
+/* Categorie */
+.categories {
     margin: 60px auto;
     width: 90%;
     max-width: 1200px;
     text-align: center;
 }
 
-.category-grid, .article-grid {
+.category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px 0;
+    color: white;
+
 }
 
-.category, .article {
-    background: rgba(255, 255, 255, 0.9);
+.category {
+    background: #ffaa00;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.164);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.category:hover, .article:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.category p {
+    color: #333;
 }
 
-.category i, .article i {
+.category h3 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.164);
+}
+
+.category:hover {
+    transform: translateY(-10px);
+}
+
+.category i {
     font-size: 3em;
-    color: #ffaa00;
+    color: #ffffff;
     margin-bottom: 15px;
     transition: transform 0.3s;
 }
 
-.category:hover i, .article:hover i {
+.category:hover i {
     transform: rotate(15deg);
 }
 
 /* Footer */
-.footer_home {
+footer {
     background: #333;
     color: #fff;
     text-align: center;
@@ -110,12 +147,12 @@ header p {
     transition: background-color 0.3s ease;
 }
 
-.footer_home a {
+footer a {
     color: #ffaa00;
     text-decoration: none;
 }
 
-.footer_home a:hover {
+footer a:hover {
     text-decoration: underline;
 }
 
