@@ -10,6 +10,10 @@ canvas {
   border-radius: 5px;
 }
 .chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 0px auto;
   height: 50vh;
