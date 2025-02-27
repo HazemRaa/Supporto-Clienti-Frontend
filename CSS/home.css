@@ -11,6 +11,9 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: background-color 0.3s ease;
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
 }
 
 /* Header */
@@ -45,7 +48,7 @@ header p {
     position: absolute;
     top: 20px;
     right: 90px;
-    font-size: 50px;
+    font-size: 40px;
     color: #fff;
     cursor: pointer;
     transition: transform 0.5s ease, color 0.3s ease;
