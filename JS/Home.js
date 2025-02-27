@@ -1,3 +1,5 @@
+
+
 //Recupero categorie ticket inserite in database
 document.addEventListener("DOMContentLoaded", async () => {
     const categoryContainer = document.getElementById("categoryContainer");
