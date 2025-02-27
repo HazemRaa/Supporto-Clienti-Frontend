@@ -4,9 +4,11 @@ stampa i dettagli dell'id ticket
 ripete per ogni ticket presente
 */
 
+document.addEventListener("DOMContentLoaded", function() {
+    createTicket();
+});
+
 // funzione per caricare i ticket associati all'id
-
-
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
     const token = localStorage.getItem("authToken");
@@ -21,32 +23,33 @@ async function createTicket() {
             throw new Error("Errore nel recupero dei ticket");
           }
     const dati = await response.json();
+
 var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
-        numero.id = "id_ticket";
+        numero.id = "id_ticket" + ticket.id;
         numero.textContent = num;
         num += 1;
 
         const tr = document.createElement("tr");
-        tr.id = "riga";
+        tr.id = "riga" + ticket.id;
 
         const utente = document.createElement("td");
-        utente.id = "utente_ticket";
+        utente.id = "utente_ticket" + ticket.id;
         utente.textContent = ticket.utente.email;
 
         const data_ap = document.createElement("td");
-        data_ap.id = "data_ticket_ap";
-        data_ap.textContent = "12-12-2012";
+        data_ap.id = "data_ticket_ap"+ ticket.id;
+        data_ap.textContent = ticket.dataApertura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
-        data_chi.id = "data_ticket_chi";
-        data_chi.textContent = "14-12-2012";
+        data_chi.id = "data_ticket_chi"+ ticket.id;
+        data_chi.textContent =ticket.dataChiusura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
-        oggetto.id = "oggetto_ticket";
+        oggetto.id = "oggetto_ticket"+ ticket.id;
         oggetto.textContent = ticket.oggetto;   
        
         tr.appendChild(numero);
@@ -56,16 +59,19 @@ var num = 1;
         tr.appendChild(oggetto);
 //Aggiunta bottone
         
-const stato = document.createElement("select");
+const selectStato = document.createElement("select");
 const th = document.createElement("th");
 
-stato.id = "stato_ticket" + num;
-const temp = num;
-console.log(ticket.categoriaTicket)
-stato.addEventListener("change", () => {
-    modificaStato(ticket.id, temp, ticket.categoriaTicket.id)}
+selectStato.id = "stato_ticket" + ticket.id;
+th.classList.add("stato-th");
+
+selectStato.addEventListener("change", () => {
+    modificaStato(ticket.id, ticket.id, ticket.categoriaTicket.id, ticket.messaggio.corpoUtente);
+    aggiornaColoreBottone(selectStato);
+}
+    
 );
-stato.classList.add("btn", "btn-primary", "stato");
+ selectStato.classList.add("btn", "btn-primary", "stato");
 
 const stati = ["APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
 
@@ -73,14 +79,19 @@ stati.forEach(status => {
   const stato_btn = document.createElement("option");
   stato_btn.value = status;
   stato_btn.textContent = status;
-  stato.appendChild(stato_btn);
+  selectStato.appendChild(stato_btn);
+
 });
 
-stato.value = ticket.status;
+selectStato.value = ticket.status;
 
-th.appendChild(stato);
+
+
+th.appendChild(selectStato);
 tr.appendChild(th);
-tbody.appendChild(tr)
+tbody.appendChild(tr);
+
+aggiornaColoreBottone(selectStato);
 });
 
   } catch (error) {
@@ -88,88 +99,330 @@ tbody.appendChild(tr)
     
   }
 }
-createTicket();
 
 
 
 //colori per bottone
-function aggiornaColoreBottone(stato_btn) {
-    if (stato_btn.innerHTML === "APERTO") {
-        stato_btn.style.backgroundColor = "red";
-        stato_btn.style.borderColor = "red";
-    } else if (stato_btn.innerHTML === "VISUALIZZATO") {
-        stato_btn.style.backgroundColor = "blue";
-        stato_btn.style.borderColor = "blue";
-    } else if (stato_btn.innerHTML === "IN_LAVORAZIONE") {
-        stato_btn.style.backgroundColor = "yellow";
-        stato_btn.style.borderColor = "yellow";
-        stato_btn.style.color = "black";
-    } else if (stato_btn.innerHTML === "CHIUSO") {
-        stato_btn.style.backgroundColor = "gray";
-        stato_btn.style.borderColor = "gray";
+function aggiornaColoreBottone(selectStato) {
+    const id = selectStato.id; 
+    const stato = document.getElementById(id); 
+
+    if (stato) {
+        if (stato.value === "APERTO") {
+            stato.style.backgroundColor = "red";
+            stato.style.borderColor = "red";
+        } else if (stato.value === "VISUALIZZATO") {
+            stato.style.backgroundColor = "blue";
+            stato.style.borderColor = "blue";
+        } else if (stato.value === "IN_LAVORAZIONE") {
+            stato.style.backgroundColor = "yellow";
+            stato.style.borderColor = "yellow";
+            stato.style.color = "black";
+        } else if (stato.value === "CHIUSO") {
+            stato.style.backgroundColor = "gray";
+            stato.style.borderColor = "gray";
+        } else {
+            stato.style.backgroundColor = "";
+            stato.style.borderColor = "";
+            stato.style.color = "";
+        }
     }
-    console.log(stato_btn);
-    console.log("ciao");
 }
+    
+    // funzione per inviare messaggio
+    async function inviaMessaggio(ticketId, messaggio, idCategoria) {
+        console.log("invia messaggio");
+        const token = localStorage.getItem("authToken"); 
+        if (!idCategoria) {
+            console.error("ERRORE: idCategoria è undefined!");
+            alert("Errore: ID Categoria non è definito. Impossibile inviare il messaggio.");
+            return;
+        }
+    
+        try {
+            const requestBody = {
+                status: "CHIUSO",
+                testoMessaggio: messaggio,
+                idCategoria: parseInt(idCategoria)
+            };
+    
+            const response = await fetch(`http://localhost:8080/ticket/${ticketId}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Errore API: ${response.status} - ${errorText}`);
+            }
+    
+            return await response.json();
+        } catch (error) {
+            console.error("Errore durante l'invio del messaggio:", error);
+            alert(`Errore nell'invio del messaggio: ${error.message}`);
+            throw error;
+        }
+    }
+    
+    
+    // Funzione per aprire il popup di invio messaggio
+    function apriPopup(ticketId, idCategoria, oggetto, messaggio, callback) {   
+        console.log("ID Categoria ricevuto nel popup:", idCategoria); 
+        console.log("Messaggio ricevuto da backend: " + messaggio);
+    
+        // Rimuove il popup esistente se già presente
+        const esistente = document.getElementById("popup-messaggio");
+        if (esistente) esistente.remove();
+    
+        // Creazione dell'overlay
+        const overlay = document.createElement("div");
+        overlay.id = "popup-messaggio";
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.background = "rgba(0, 0, 0, 0.5)";
+        overlay.style.display = "flex";
+        overlay.style.alignItems = "center";
+        overlay.style.justifyContent = "center";
+        overlay.style.zIndex = "1000";
+    
+        // Creazione del popup
+        const popupBody = document.createElement("div");
+        popupBody.style.background = "#ffaa00";
+        popupBody.style.padding = "20px";
+        popupBody.style.borderRadius = "10px";
+        popupBody.style.width = "600px";
+        popupBody.style.textAlign = "center";
+        popupBody.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.3)";
+        popupBody.style.position = "relative";
+    
+        popupBody.innerHTML = `
+            <button class="popup-close" style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                border: none;
+                background: none;
+                font-size: 20px;
+                cursor: pointer;
+            ">×</button>
+            <h2>Invia un Messaggio</h2>
+    
+            <div style="text-align: left; background: white; padding: 10px; border-radius: 5px; margin-bottom: 10px; color: black; word-wrap: break-word; overflow-wrap: break-word;">
+                <strong>Oggetto:</strong> ${oggetto || "N/A"} <br>
+                <strong>Messaggio:</strong> ${messaggio || "Nessun messaggio iniziale"}
+            </div>
+    
+            <textarea id="messaggio-input" placeholder="Scrivi un messaggio..." style="
+                width: 100%;
+                height: 150px;
+                margin-top: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            "></textarea>
+    
+            <button id="invia-messaggio" class="btn btn-primary" style="
+                margin-top: 10px;
+                padding: 10px 20px;
+                border: none;
+                background: #007bff;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+            ">Invia</button>
+        `;
+    
+        overlay.appendChild(popupBody);
+        document.body.appendChild(overlay);
+    
+        // Chiudi il popup quando si clicca sulla "X"
+        document.querySelector(".popup-close").onclick = () => overlay.remove();
+    
+        // Gestione dell'invio del messaggio
+        document.getElementById("invia-messaggio").onclick = async () => {
+            const nuovoMessaggio = document.getElementById("messaggio-input").value.trim();
+            if (!nuovoMessaggio) {
+                alert("Inserisci un messaggio.");
+                return;
+            }
+    
+            await inviaMessaggio(ticketId, nuovoMessaggio, idCategoria);
+            overlay.remove();
+            if (callback) callback();
+        };
+    }
+    
+    
+    //Filtro
+    document.addEventListener("DOMContentLoaded", function() {
+        const filtri = document.querySelectorAll(".dropdown-item");
+    
+        filtri.forEach(filtro => {
+            filtro.addEventListener("click", function() {
+                const statoSelezionato = this.id;
+                const righe = document.querySelectorAll("#tbody tr"); //seleziona tutte le righe della tabella
+    
+                filtri.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+    
+                console.log(statoSelezionato);
+                righe.forEach(riga => {
+                   
+                    const statoBtn = riga.querySelector(".stato");
+                    if (statoBtn) {
+                        const statoTicket = statoBtn.value;
+    
+                        if (statoTicket === statoSelezionato || statoSelezionato === "tutti" ) {
+                            riga.style.display = "";
+                        } else if (statoTicket !== statoSelezionato) {
+                            riga.style.display = "none";
+                        }
+                    }
+                });
+            });
+        });
+    });
+    
+    
+    // Funzione per aggiornare lo stato (con messaggio)
+async function modificaStato(idTicket, num, idCategoria, messaggio) { 
+    const stato_btn = document.getElementById("stato_ticket" + num);
 
+    if (!stato_btn) {
+        console.error("Bottone stato non trovato!");
+        return;
+    }
 
-//Filtro
-document.addEventListener("DOMContentLoaded", function() {
-    const filtri = document.querySelectorAll(".dropdown-item");
+    if (stato_btn.value === "CHIUSO") {
+        alert("Devi inviare un messaggio prima di chiudere il ticket.");
 
-    filtri.forEach(filtro => {
-        filtro.addEventListener("click", function() {
-            const statoSelezionato = this.id;
-            const righe = document.querySelectorAll("#tbody tr"); //seleziona tutte le righe della tabella
-
-            filtri.forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
-
-            console.log(statoSelezionato);
-            righe.forEach(riga => {
-               
-                const statoBtn = riga.querySelector(".stato");
-                if (statoBtn) {
-                    const statoTicket = statoBtn.innerHTML.trim();
-
-                    if (statoTicket === statoSelezionato || statoSelezionato === "tutti" ) {
-                        riga.style.display = "";
-                    } else if (statoTicket !== statoSelezionato) {
-                        riga.style.display = "none";
-                    }
+        try {
+            // Recupera i dettagli del ticket con una chiamata API
+            const response = await fetch(`http://localhost:8080/ticket/${idTicket}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
                 }
             });
-        });
-    });
-});
 
+            if (!response.ok) {
+                throw new Error(`Errore nel recupero del ticket: ${response.status}`);
+            }
 
-// Evento se il bottone è cliccato
-function modificaStato(idTicket, num, idCategoria) {
-    const stato_btn = document.getElementById("stato_ticket" + num);
-    const token = localStorage.getItem("authToken");
-    const nuovoStato = stato_btn.value;
-    console.log(nuovoStato)
-    console.log(idCategoria)
+            const ticket = await response.json();
 
+            // Apri il popup con i dettagli del ticket
+            apriPopup(idTicket, idCategoria, ticket.oggetto, messaggio, async () => {        
+                console.log("Messaggio inviato, ora chiudiamo il ticket...");
+
+                try {
+                    // Disabilitiamo SUBITO il bottone per evitare riabilitazioni
+                    stato_btn.disabled = true;
+                    stato_btn.setAttribute("disabled", "true");
+                    stato_btn.style.pointerEvents = "none";
+
+                    // Aggiorna lo stato del ticket a "CHIUSO" nel database
+                    const updateResponse = await fetch(`http://localhost:8080/ticket/${idTicket}`, {
+                        method: "PUT",
+                        headers: {
+                            "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "status": "CHIUSO",
+                            "idCategoria": parseInt(idCategoria)
+                        })
+                    });
+
+                    if (!updateResponse.ok) {
+                        throw new Error(`Errore nell'aggiornamento dello stato: ${updateResponse.status}`);
+                    }
+
+                    const updatedTicket = await updateResponse.json();
+                    console.log("Ticket chiuso con successo:", updatedTicket);
+
+                    // Forziamo la disabilitazione di nuovo per sicurezza
+                    stato_btn.value = "CHIUSO";
+                    stato_btn.disabled = true;
+                    stato_btn.setAttribute("disabled", "true");
+                    stato_btn.style.pointerEvents = "none";
+
+                    // Disabilitiamo la riga del ticket
+                    const ticketRow = document.getElementById("riga_" + idTicket);
+                    if (ticketRow) {
+                        ticketRow.style.pointerEvents = "none";
+                        ticketRow.style.opacity = "0.6";
+                    }
+
+                    // CONTROLLIAMO OGNI 500ms SE IL BOTTONE È ANCORA DISABILITATO
+                    setInterval(() => {
+                        if (stato_btn.value === "CHIUSO") {
+                            stato_btn.disabled = true;
+                            stato_btn.setAttribute("disabled", "true");
+                            stato_btn.style.pointerEvents = "none";
+                        }
+                    }, 500);
+
+                } catch (error) {
+                    console.error("Errore nell'aggiornamento dello stato:", error);
+                }
+            });
+
+        } catch (error) {
+            console.error("Errore nel recupero del ticket:", error);
+        }
+
+        return; 
+    }
+
+    // Se lo stato non è CHIUSO, aggiorniamolo normalmente
     fetch(`http://localhost:8080/ticket/${idTicket}`, {
         method: "PUT",
         headers: {
-            "Authorization" : token,
-            "Content-Type" : "application/json"
+            "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+            "Content-Type": "application/json"
         },
-        body : JSON.stringify({
-            "status": nuovoStato,
+        body: JSON.stringify({
+            "status": stato_btn.value,
             "idCategoria": parseInt(idCategoria)
         })
     })
     .then(response => {
-        return response.json()
+        if (!response.ok) {
+            throw new Error(`Errore HTTP: ${response.status}`);
+        }
+        return response.json();
     })
     .then(data => {
-        console.log(data)
+        console.log("Stato aggiornato:", data);
+
+        // Se lo stato aggiornato è "CHIUSO", assicuriamoci che il pulsante sia disabilitato
+        if (stato_btn.value === "CHIUSO") {
+            stato_btn.disabled = true;
+            stato_btn.setAttribute("disabled", "true");
+            stato_btn.style.pointerEvents = "none";
+
+            // Controllo continuo per sicurezza
+            setInterval(() => {
+                stato_btn.disabled = true;
+                stato_btn.setAttribute("disabled", "true");
+                stato_btn.style.pointerEvents = "none";
+            }, 500);
+        }
     })
-    .catch(errore => {
-        console.error("Errore" + errore);
+    .catch(error => {
+        console.error("Errore aggiornamento stato:", error);
     });
-};
+}
+
+
+
+    
+   

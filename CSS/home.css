@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -37,29 +36,31 @@ header p {
     opacity: 0.85;
 }
 
-/* Bottone login */
-.login-button {
+/* Icona login */
+.avatar {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 10px 20px;
-    background-color: #ffcc00;
-    color: #333;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.5s ease, color 0.3s ease;
 }
 
-.login-button:hover {
-    background-color: #ffaa00;
-    transform: scale(1.1);
+.avatar:hover {
+    transform: scale(1.3);
+    color: #ffd700;
 }
 
 /* Animazione di fade-in */
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Sezione Apri Ticket */
@@ -88,42 +89,51 @@ header p {
     transform: scale(1.1);
 }
 
-/* Categorie e articoli */
-.categories, .popular-articles {
+/* Categorie */
+.categories {
     margin: 60px auto;
     width: 90%;
     max-width: 1200px;
     text-align: center;
 }
 
-.category-grid, .article-grid {
+.category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px 0;
+    color: white;
+
 }
 
-.category, .article {
-    background: rgba(255, 255, 255, 0.9);
+.category {
+    background: #ffaa00;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.164);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.category:hover, .article:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.category p {
+    color: #333;
 }
 
-.category i, .article i {
+.category h3 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.164);
+}
+
+.category:hover {
+    transform: translateY(-10px);
+}
+
+.category i {
     font-size: 3em;
-    color: #ffaa00;
+    color: #ffffff;
     margin-bottom: 15px;
     transition: transform 0.3s;
 }
 
-.category:hover i, .article:hover i {
+.category:hover i {
     transform: rotate(15deg);
 }
 

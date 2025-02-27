@@ -5,10 +5,13 @@ ripete per ogni ticket presente
 */
 
 // Controlla se c'e il token 
-    // Se si vabene
-    // Se no rimanda -> Login
-
-
+const token = localStorage.getItem("authToken");
+const ruolo = localStorage.getItem("ruolo");
+/*
+if (token === null) {
+    window.location.href="../login.html";
+}
+*/
 // funzione per caricare i ticket associati all'id
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
@@ -28,25 +31,25 @@ async function createTicket() {
 var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
-        numero.id = "id_ticket";
+        numero.id = "id_ticket" + ticket.id;
         numero.textContent = num;
         num += 1;
 
         const tr = document.createElement("tr");
-        tr.id = "riga";
+        tr.id = "riga"+ ticket.id;
 
         const data_ap = document.createElement("td");
-        data_ap.id = "data_ticket_ap";
+        data_ap.id = "data_ticket_ap"+ ticket.id;
         data_ap.textContent = ticket.dataApertura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
-        data_chi.id = "data_ticket_chi";
+        data_chi.id = "data_ticket_chi"+ ticket.id;
         data_chi.textContent = ticket.dataChiusura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
-        oggetto.id = "oggetto_ticket";
+        oggetto.id = "oggetto_ticket"+ ticket.id;
         oggetto.textContent = ticket.oggetto;
         
         console.log(ticket.oggetto);
@@ -60,7 +63,7 @@ var num = 1;
         //Aggiunta bottone
         const stato = document.createElement("td");
         const stato_btn = document.createElement("button");
-        stato.id = "stato_ticket";
+        stato.id = "stato_ticket"+ ticket.id;
         stato_btn.classList.add("btn", "btn-primary", "stato"); 
         stato_btn.textContent = ticket.status;
         stato.appendChild(stato_btn);
@@ -96,8 +99,6 @@ function aggiornaColoreBottone(stato_btn) {
         stato_btn.style.backgroundColor = "gray";
         stato_btn.style.borderColor = "gray";
     }
-    console.log(stato_btn);
-    console.log("ciao");
 }
 
 
