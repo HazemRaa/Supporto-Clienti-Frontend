@@ -46,10 +46,6 @@ function editProfile(){
     document.getElementById("edit-btn").style.display="none";
     document.getElementById("delete-btn").style.display="none";
 
-    // document.getElementById("nome-edit").value=document.getElementById("nome-edit").textContent;
-    // document.getElementById("cognome-edit").value=document.getElementById("cognome-edit").textContent;
-    // document.getElementById("email-edit").value=document.getElementById("email-edit").textContent;
-    // document.getElementById("password-edit").value="";
 
     document.getElementById("nome-edit").disabled=false;
     document.getElementById("cognome-edit").disabled=false;
