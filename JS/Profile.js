@@ -17,12 +17,12 @@ function loadProfile(){
     })
     .then((data) => {
         console.log(data);
-        document.getElementById("nome-edit").textContent = data.nome;
-        document.getElementById("cognome-edit").textContent = data.cognome;
-        document.getElementById("email-edit").textContent = data.email;
+        document.getElementById("nome-edit").value = data.nome;
+        document.getElementById("cognome-edit").value = data.cognome;
+        document.getElementById("email-edit").value = data.email;
     })
     .catch((error) => {
-        window.location.href = "Login.html";
+       // window.location.href = "Login.html";
         console.error("Errore durante il caricamento del profilo:", error);
     });
 }
@@ -39,12 +39,17 @@ function editProfile(){
     document.getElementById("cognome-edit").style.display="inline";
     document.getElementById("email-edit").style.display="inline";
     document.getElementById("password-edit").style.display="inline";
-    document.getElementById("save-edit").style.display="inline";
+    document.getElementById("password").style.display="inline";
 
-    document.getElementById("nome-edit").value=document.getElementById("nome").textContent;
-    document.getElementById("cognome-edit").value=document.getElementById("cognome").textContent;
-    document.getElementById("email-edit").value=document.getElementById("email").textContent;
-    document.getElementById("password-edit").value="";
+    document.getElementById("save-btn").style.display="inline";
+    document.getElementById("ticket-btn").style.display="none";
+    document.getElementById("edit-btn").style.display="none";
+    document.getElementById("delete-btn").style.display="none";
+
+    // document.getElementById("nome-edit").value=document.getElementById("nome-edit").textContent;
+    // document.getElementById("cognome-edit").value=document.getElementById("cognome-edit").textContent;
+    // document.getElementById("email-edit").value=document.getElementById("email-edit").textContent;
+    // document.getElementById("password-edit").value="";
 
     document.getElementById("nome-edit").disabled=false;
     document.getElementById("cognome-edit").disabled=false;
@@ -52,26 +57,26 @@ function editProfile(){
     document.getElementById("password-edit").disabled=false;
 
 }
-
+let updateUtente={};
 // salvare le modifiche 
     function saveProfile(){
         const token = localStorage.getItem("authToken");
-        if(!token){ window.location.href="Login.htmk";
+        if(!token){
+             window.location.href="Login.html";
             return;
-
         }
+
         const nome=document.getElementById("nome-edit").value.trim();
         const cognome=document.getElementById("cognome-edit").value.trim();
         const email=document.getElementById("email-edit").value.trim();
         const password=document.getElementById("password-edit").value.trim();
-    }
-        const updateUtente={nome, cognome, email};  
-        if(password) updateUtente.password=password;       /* se in spring non hanno il controllo per la ps se è vuoto o no lasciamola cosi se hanno il controllo aggiungi il campo passord alla variabile update/ controlliamo se l'utente non modifica la password 
-                                                            il campo password non verrà inviato con la richiesta fetcch
-                                                            evitando di sovrascrivelo */
-        
+   
+         updateUtente={nome, cognome, email};  
 
-    const token = localStorage.getItem("authToken");
+        if(password) updateUtente.password=password;   
+        
+   
+    
     fetch("http://localhost:8080/utenti", {
         method: "PUT",
         headers: {
@@ -85,35 +90,40 @@ function editProfile(){
         throw new Error("Errore nel salvataggio del profilo");
     }
     return response.json();
-        })
+
+    })
 
     .then((data) => {
     console.log("Profilo aggiornato con successo:", data);
 
 
-        document.getElementById("nome").textContent = data.nome;
-        document.getElementById("cognome").textContent = data.cognome;
-        document.getElementById("email").textContent = data.email;
+        document.getElementById("nome-edit").textContent = data.nome;
+        document.getElementById("cognome-edit").textContent = data.cognome;
+        document.getElementById("email-edit").textContent = data.email;
 
     
-        document.getElementById("nome-edit").style.display = "none";
-        document.getElementById("cognome-edit").style.display = "none";
-        document.getElementById("email-edit").style.display = "none";
+        document.getElementById("nome-edit").style.display = "inline";
+        document.getElementById("cognome-edit").style.display = "inline";
+        document.getElementById("email-edit").style.display = "inline";
+        document.getElementById("ticket-btn").style.display="inline";
+        document.getElementById("edit-btn").style.display="inline";
+        document.getElementById("delete-btn").style.display="inline";
         document.getElementById("password-edit").style.display = "none";
-        document.getElementById("save-edit").style.display = "none";
+        document.getElementById("password").style.display="none";
+        document.getElementById("save-btn").style.display = "none";
 
         document.getElementById("nome-edit").disabled = true;
         document.getElementById("cognome-edit").disabled = true;
         document.getElementById("email-edit").disabled = true;
         document.getElementById("password-edit").disabled = true;
+
+
 })
 
-
-    
     .catch((error) => {
     console.error("Errore durante l'aggiornamento del profilo:", error);
     });
-
+ }
    
 //eliminare l'account
 function deleteAccount() {
@@ -140,3 +150,31 @@ function deleteAccount() {
         console.error("Errore durante l'eliminazione dell'account:", error);
     });
 }
+
+    function logout()
+{
+     const token = localStorage.getItem("authToken");
+      
+    fetch("http://localhost:8080/logout", {
+        method: "GET", 
+        headers: { Authorization: `Bearer ${token}`,
+    },
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error("Errore durante il logout!")
+        }else{
+            window.alert("addio.")
+            window.location.href="home.html"
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+   
+}
+document.getElementById("btn-logout").addEventListener("click", function(event){
+    event.preventDefault();
+    logout();
+});

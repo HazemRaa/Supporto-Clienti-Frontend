@@ -3,7 +3,7 @@
 const token =localStorage.getItem("authToken");
 
 if(token != null){
-    window.location.href="home.html";
+    //window.location.href="home.html";
                                                                     // recuperare il token e controlla che l'utente esiste, viene reindrizzato al homepage.
 }
 
@@ -20,10 +20,9 @@ if(token != null){
         return;                                                 //interrompe la richiesta al server controllo se i campi sono vuoti
 
     }
-
         fetch("http://localhost:8080/login",{                  /* richihesta HTTP di tipo POST al server
                                                                 localhost per verificare le credenziali
-                                                                vengono inviati nel body in formato JSON ( ora sono) */ 
+                                                      vengono inviati nel body in formato JSON ( ora sono) */ 
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

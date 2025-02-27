@@ -10,35 +10,45 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* Pulsante Home */
-.home-button {
+.btn-logout {
     position: absolute;
     top: 20px;
     right: 20px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn-home {
-    background: #ffaa00;
-    color: white;
+    position: absolute;
+    top: 20px;
+    right: 150px; 
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    background-color: #ffcc00;
+    color: #333;
+    border-radius: 20px;
     text-decoration: none;
-    cursor: pointer;
-    transition: background 0.3s;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-home:hover {
-    background: #ff6a00;
+.btn-home:hover,
+.btn-logout:hover {
+    background-color: #ffaa00;
+    transform: scale(1.1);
 }
-/* Contenitore principale */
+
+
 .card-profile {
-
+    font-weight: 900;
     width: 50%;
     margin: 50px auto;
     padding: 30px;
-    background-color: #13ffb0;
+    background-color: #2a2712;
     border-radius: 8px;
     box-shadow: 0 10px 8px rgba(157, 157, 157, 0.1);
 }
