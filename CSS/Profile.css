@@ -14,7 +14,7 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #ffcc00;
     color: #333;
     border-radius: 20px;
@@ -42,78 +42,46 @@ body {
     transform: scale(1.1);
 }
 
-
 .card-profile {
     font-weight: 900;
-    width: 50%;
+    width: 30%;
     margin: 50px auto;
     padding: 30px;
-    background-color: #2a2712;
+    padding-bottom: 50px;
+    background-color: #3a3400;
     border-radius: 8px;
     box-shadow: 0 10px 8px rgba(157, 157, 157, 0.1);
-}
-
-h1 {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
+    text-align: start; 
 }
 
 
 .profile {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    display: block;
-}
-
-input[type="text"] {
-
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-
     width: 100%;
-    max-width: 500px;
-    text-align: center;
+    max-width: 500px; 
+    margin: 0 auto; 
 }
 
-/* Titolo */
-h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-    color: #fff;
-}
-
-/* Sezione profilo */
-.profile {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
+/* Etichette */
 .profile label {
     font-size: 16px;
     color: #fff;
     display: block;
     margin-bottom: 5px;
+    text-align: left;
 }
 
+/* Input */
 .profile input {
-    width: 100%;
-    padding: 10px 15px;
-    margin: 5px 0;
+    width: 100%; 
+    max-width: 500px; 
+    padding: 10px;
     border: none;
     border-radius: 5px;
     background: #f1f1f1;
     color: #333;
     font-size: 16px;
     transition: background 0.3s;
+    display: block;
 }
 
 .profile input:focus {
@@ -125,14 +93,17 @@ h1 {
 .Ticket,
 .edit-btn,
 .delete-btn {
-    width: 100%;
-    padding: 10px;
+    width: 100%; /* Occupa tutta la larghezza del contenitore */
+    max-width: 500px; /* Impedisce che siano più larghi degli input */
+    padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
     margin-top: 10px;
+    display: block; /* Assicura che siano allineati verticalmente */
+    text-align: center;
 }
 
 .Ticket {
@@ -142,15 +113,20 @@ h1 {
 
 .Ticket:hover {
     background: #ff6a00;
+    border: 2px solid rgb(230, 173, 74);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .edit-btn {
     background: #28a745;
     color: white;
+    
 }
 
 .edit-btn:hover {
     background: #218838;
+    border: 2px solid rgb(0, 130, 63);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .delete-btn {
@@ -160,6 +136,8 @@ h1 {
 
 .delete-btn:hover {
     background: #c82333;
+    border: 2px solid rgb(255, 0, 0);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 /* Responsive Design */
