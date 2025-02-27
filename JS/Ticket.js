@@ -99,8 +99,6 @@ function aggiornaColoreBottone(stato_btn) {
         stato_btn.style.backgroundColor = "gray";
         stato_btn.style.borderColor = "gray";
     }
-    console.log(stato_btn);
-    console.log("ciao");
 }
 
 
