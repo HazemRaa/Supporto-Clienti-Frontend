@@ -24,29 +24,29 @@ async function createTicket() {
 var num = 1;
   dati.forEach (ticket => {
         const numero = document.createElement("th");
-        numero.id = "id_ticket";
+        numero.id = "id_ticket" + ticket.id;
         numero.textContent = num;
         num += 1;
 
         const tr = document.createElement("tr");
-        tr.id = "riga";
+        tr.id = "riga" + ticket.id;
 
         const utente = document.createElement("td");
-        utente.id = "utente_ticket";
+        utente.id = "utente_ticket" + ticket.id;
         utente.textContent = ticket.utente.email;
 
         const data_ap = document.createElement("td");
-        data_ap.id = "data_ticket_ap";
-        data_ap.textContent = "12-12-2012";
+        data_ap.id = "data_ticket_ap"+ ticket.id;
+        data_ap.textContent = ticket.dataApertura;
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
-        data_chi.id = "data_ticket_chi";
-        data_chi.textContent = "14-12-2012";
+        data_chi.id = "data_ticket_chi"+ ticket.id;
+        data_chi.textContent =ticket.dataChiusura;
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
-        oggetto.id = "oggetto_ticket";
+        oggetto.id = "oggetto_ticket"+ ticket.id;
         oggetto.textContent = ticket.oggetto;   
        
         tr.appendChild(numero);
@@ -59,11 +59,12 @@ var num = 1;
 const stato = document.createElement("select");
 const th = document.createElement("th");
 
-stato.id = "stato_ticket" + num;
-const temp = num;
+stato.id = "stato_ticket" + ticket.id;
+th.classList.add("stato-th");
+
 console.log(ticket.categoriaTicket)
 stato.addEventListener("change", () => {
-    modificaStato(ticket.id, temp, ticket.categoriaTicket.id)}
+    modificaStato(ticket.id, ticket.id, ticket.categoriaTicket.id)}
 );
 stato.classList.add("btn", "btn-primary", "stato");
 
