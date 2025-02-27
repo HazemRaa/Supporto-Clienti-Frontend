@@ -60,6 +60,7 @@ const stato = document.createElement("select");
 const th = document.createElement("th");
 
 stato.id = "stato_ticket" + ticket.id;
+th.classList.add("stato-th");
 
 console.log(ticket.categoriaTicket)
 stato.addEventListener("change", () => {

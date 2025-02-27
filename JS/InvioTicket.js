@@ -1,9 +1,9 @@
 const token = localStorage.getItem("authToken");
 const ruolo = localStorage.getItem("ruolo");
-
+/*
 if (token === null) {
     window.location.href="login.html";
-} else {
+} else {*/
             document.getElementById("Ticket-form").addEventListener("submit" , (event)  =>{
                 event.preventDefault();
                 

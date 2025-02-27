@@ -3,12 +3,13 @@
 const token = localStorage.getItem("authToken");
 const ruolo = localStorage.getItem("ruolo");
 
+/*
 if (token === null) {
     window.location.href="login.html";
 } else if (ruolo != "Admin") {
     window.location.href="home.html";
 }
-
+*/
 
 /* Prende l'id dell'utente e il token
 prende gli id ticket
