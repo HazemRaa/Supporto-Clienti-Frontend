@@ -57,4 +57,17 @@ document.getElementById("Registrazione-form").addEventListener("submit" , (event
         
         alert("Si è verificato un errore durante la registrazione.");
     });
+
 });
+
+function showPassword() {
+    let showPasswordCheckbox = document.getElementById("show-password");
+    
+    if (showPasswordCheckbox.checked) {
+        password.type = "text";
+        confermaPassword.type = "text";
+    } else {
+        password.type = "password";
+        confermaPassword.type = "password";
+    }
+}
