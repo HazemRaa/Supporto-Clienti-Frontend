@@ -11,7 +11,7 @@ body {
 }
 
 /* Contenitore principale */
-.container {
+.card-profile {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px; /* Padding uniforme su tutti i lati */
     border-radius: 10px;
@@ -25,7 +25,9 @@ h1 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 32px;
+    font-weight: 700;
 }
+
 
 /* Sezione profilo */
 .profile {
@@ -35,7 +37,6 @@ h1 {
 
 .profile label {
     font-size: 16px;
-    color: #fff;
     display: block;
     margin-bottom: 5px;
 }
@@ -106,7 +107,7 @@ h1 {
     }
 
     h1 {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     .profile input {
