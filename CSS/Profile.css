@@ -1,5 +1,21 @@
 /* SE VEDI QUESTO è DEFINITIVO */
 /* Background generale */
+
+/* Pulsanti */
+
+.btn-logout {
+    background: #000000;
+    color: white;
+}
+
+.btn-logout:hover {
+    background:  #000000;
+    border: 2px solid  #2b2b2b;
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
+}
+
+/* SE VEDI QUESTO è DEFINITIVO */
+/* Background generale */
 body {
     margin: 0;
     padding: 0;
@@ -11,7 +27,7 @@ body {
 }
 
 /* Contenitore principale */
-.container {
+.card-profile {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px; /* Padding uniforme su tutti i lati */
     border-radius: 10px;
@@ -25,7 +41,9 @@ h1 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 32px;
+    font-weight: 700;
 }
+
 
 /* Sezione profilo */
 .profile {
@@ -35,7 +53,6 @@ h1 {
 
 .profile label {
     font-size: 16px;
-    color: #fff;
     display: block;
     margin-bottom: 5px;
 }
@@ -76,6 +93,7 @@ h1 {
     text-align: center;
 }
 
+
 .Ticket {
     background: #ffaa00;
     color: white;
@@ -83,20 +101,15 @@ h1 {
 
 .Ticket:hover {
     background: #ff6a00;
-    border: 2px solid rgb(230, 173, 74);
-    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .edit-btn {
     background: #28a745;
     color: white;
-
 }
 
 .edit-btn:hover {
     background: #218838;
-    border: 2px solid rgb(0, 130, 63);
-    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .delete-btn {
@@ -106,28 +119,18 @@ h1 {
 
 .delete-btn:hover {
     background: #c82333;
-    border: 2px solid rgb(255, 0, 0);
-    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
-.btn-logout {
-    background: #000000;
-    color: white;
-}
-
-.btn-logout:hover {
-    background:  #000000;
-    border: 2px solid  #2b2b2b;
-    box-shadow: 5px 5px 0px rgb(255, 255, 255);
-}
 /* Responsive Design */
 @media (max-width: 480px) {
     .card-profile {
         padding: 20px;
+        margin-top: 100px;
+        margin-bottom: 50px;
     }
 
     h1 {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     .profile input {
@@ -136,7 +139,8 @@ h1 {
 
     .Ticket,
     .edit-btn,
-    .delete-btn {
+    .delete-btn,
+    .btn-logout {
         font-size: 14px;
     }
 }
