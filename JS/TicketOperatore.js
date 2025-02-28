@@ -111,9 +111,11 @@ function aggiornaColoreBottone(selectStato) {
         if (stato.value === "APERTO") {
             stato.style.backgroundColor = "red";
             stato.style.borderColor = "red";
+            stato_btn.style.color = "white";
         } else if (stato.value === "VISUALIZZATO") {
             stato.style.backgroundColor = "blue";
             stato.style.borderColor = "blue";
+            stato_btn.style.color = "white";
         } else if (stato.value === "IN_LAVORAZIONE") {
             stato.style.backgroundColor = "yellow";
             stato.style.borderColor = "yellow";
@@ -121,6 +123,7 @@ function aggiornaColoreBottone(selectStato) {
         } else if (stato.value === "CHIUSO") {
             stato.style.backgroundColor = "gray";
             stato.style.borderColor = "gray";
+            stato_btn.style.color = "white";
         } else {
             stato.style.backgroundColor = "";
             stato.style.borderColor = "";
