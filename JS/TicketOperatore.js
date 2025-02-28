@@ -348,28 +348,6 @@ async function modificaStato(idTicket, num, idCategoria, messaggio) {
                     const updatedTicket = await updateResponse.json();
                     console.log("Ticket chiuso con successo:", updatedTicket);
 
-                    // Forziamo la disabilitazione di nuovo per sicurezza
-                    stato_btn.value = "CHIUSO";
-                    stato_btn.disabled = true;
-                    stato_btn.setAttribute("disabled", "true");
-                    stato_btn.style.pointerEvents = "none";
-
-                    // Disabilitiamo la riga del ticket
-                    const ticketRow = document.getElementById("riga_" + idTicket);
-                    if (ticketRow) {
-                        ticketRow.style.pointerEvents = "none";
-                        ticketRow.style.opacity = "0.6";
-                    }
-
-                    // CONTROLLIAMO OGNI 500ms SE IL BOTTONE È ANCORA DISABILITATO
-                    setInterval(() => {
-                        if (stato_btn.value === "CHIUSO") {
-                            stato_btn.disabled = true;
-                            stato_btn.setAttribute("disabled", "true");
-                            stato_btn.style.pointerEvents = "none";
-                        }
-                    }, 500);
-
                 } catch (error) {
                     console.error("Errore nell'aggiornamento dello stato:", error);
                 }
@@ -402,20 +380,7 @@ async function modificaStato(idTicket, num, idCategoria, messaggio) {
     })
     .then(data => {
         console.log("Stato aggiornato:", data);
-
-        // Se lo stato aggiornato è "CHIUSO", assicuriamoci che il pulsante sia disabilitato
-        if (stato_btn.value === "CHIUSO") {
-            stato_btn.disabled = true;
-            stato_btn.setAttribute("disabled", "true");
-            stato_btn.style.pointerEvents = "none";
-
-            // Controllo continuo per sicurezza
-            setInterval(() => {
-                stato_btn.disabled = true;
-                stato_btn.setAttribute("disabled", "true");
-                stato_btn.style.pointerEvents = "none";
-            }, 500);
-        }
+        
     })
     .catch(error => {
         console.error("Errore aggiornamento stato:", error);

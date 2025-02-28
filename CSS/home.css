@@ -1,3 +1,4 @@
+/* SE VEDI QUESTO è DEFINITIVO */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,9 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: background-color 0.3s ease;
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
 }
 
 /* Header */
@@ -36,12 +40,16 @@ header p {
     opacity: 0.85;
 }
 
+.header-content{
+    justify-content: center;
+}
+
 /* Icona login */
 .avatar {
     position: absolute;
     top: 20px;
-    right: 20px;
-    font-size: 50px;
+    right: 90px;
+    font-size: 40px;
     color: #fff;
     cursor: pointer;
     transition: transform 0.5s ease, color 0.3s ease;
@@ -62,6 +70,31 @@ header p {
         opacity: 1;
     }
 }
+
+
+/* Icona home */
+.home-button {
+    margin-right: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.5s ease, color 0.3s ease;
+}
+
+.home-button:hover{
+    transform: scale(1.3);
+    color: #ffd700;
+}
+
+.header-btn {
+    display: flex;
+    align-items: center; /* Opzionale: allinea verticalmente al centro */
+    justify-content: flex-start; /* Opzionale: allinea orizzontalmente all'inizio */
+  }
+
 
 /* Sezione Apri Ticket */
 .open-ticket {
@@ -154,25 +187,4 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
-}
-
-/* Pulsante "Torna su" */
-#back-to-top {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px;
-    background-color: #ffaa00;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-#back-to-top:hover {
-    background-color: #ffaa00;
-    transform: scale(1.1);
 }
