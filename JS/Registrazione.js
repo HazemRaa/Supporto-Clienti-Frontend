@@ -19,13 +19,18 @@ document.getElementById("Registrazione-form").addEventListener("submit" , (event
         return;
     }
 
+    if(password.lenght < 5 || password.length > 10){
+        alert("La password deve avere minimo 5 caratteri e massimo 10 caratteri!")
+        return;
+    }
+
     if(!privacyChecked){
         alert("Bisogna accettare la Privacy Policy per continuare.");
         return;
     }
 
     if(!emailRegex.test(email)){
-        alert("inserisci un email valido")
+        alert("inserisci un email valida")
         return;
     }
 
