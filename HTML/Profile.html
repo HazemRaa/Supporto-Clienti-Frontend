@@ -22,37 +22,43 @@
     </header>
     
     <div class="card-profile"> 
-            <h1>Profile</h1>
+      <h1>Profilo</h1>
 
-        <div class="profile">
-            
-            <label for="nome-edit"><b>Nome</b></label>
-            <input type="text" id="nome-edit" style="display: none;">
-        </div>
+  <div class="profile">
+      
+      <label for="nome-edit"><b>Nome:</b></label>
+        <input type="text" id="nome-edit" disabled="true" />
 
-        <div class="profile">
-            <label for="cognome-edit"><b>Cognome:</b></label>
-            <input type="text" id="cognome-edit" style="display: none;"> 
-        </div>
+        <label for="cognome-edit">Cognome:</label>
+        <input type="text" id="cognome-edit" disabled="true" />
 
-        <div class="profile">
-            <label for="email"><b>E-mail:</b></label>
-            <input type="text" id="email-edit" style="display: none;">
-        </div>
+        <label for="email">E-mail:</label>
+        <input type="text" id="email-edit" disabled="true" /><br />
 
-        <div class="profile">
-           
-            <input type="text" id="password-edit" style="display: none;">
-        </div>
-        
-        
-        <div class="profile">
-            
-            <button class="Ticket" id="ticket-btn" onclick="goToTickets()">I miei ticket</button>
-            <button class="edit-btn" id="edit-brn" onclick="editProfile()">Modifica Profilo</button>
-            <button class="edit-btn" id="save-btn" onclick="saveProfile()" style="display: none;" >Salva</button>
-            <button class="delete-btn" id="delete-btn" onclick="deleteAccount()">Elimina Profilo</button>
-        </div>
+        <label for="password" id="password" style="display: none"
+          >Password:</label
+        >
+        <input type="password" id="password-edit" style="display: none" />
+
+        <button class="Ticket" id="ticket-btn" onclick="goToTickets()">
+          I miei ticket
+        </button>
+        <button class="edit-btn" id="edit-btn" onclick="editProfile()">
+          Modifica Profilo
+        </button>
+        <button
+          class="edit-btn"
+          id="save-btn"
+          onclick="saveProfile()"
+          style="display: none"
+        >
+          Salva
+        </button>
+        <button href="../HTML/Home.html" id="btn-logout" class="btn-logout">Logout</button>
+        <button class="delete-btn" id="delete-btn" onclick="deleteAccount()">
+          Elimina Profilo
+        </button>
+      </div>
     </div>
     <script src="../JS/Profile.js" defer></script>
    
