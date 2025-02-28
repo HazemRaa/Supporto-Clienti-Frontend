@@ -157,20 +157,20 @@ fetch("http://localhost:8080/utenti", {
  }
 
 
-   
+ 
 //eliminare l'account
 function deleteAccount() {
-
+   
+    console.log(token + ruolo);
     if (!confirm("Vuoi davvero eliminare l'account?"))
          return;
 
-    if(role==="OPERATORE"){
+    if(ruolo==="OPERATORE"){
         alert("Non puoi eliminare l'account di un operatore!")
         return;
     }
 
-    const token = localStorage.getItem("authToken");
-
+   
     fetch("http://localhost:8080/utenti", {
         method: "DELETE",
         headers: {

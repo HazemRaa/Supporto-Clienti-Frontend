@@ -6,17 +6,7 @@ ripete per ogni ticket presente
 
 // Controlla se c'e il token 
 const token = localStorage.getItem("authToken");
-const ruolo = localStorage.getItem("userRole");
-
-if (token === null) {
-    window.location.href="login.html";
-} else if (ruolo === "Operatore") {
-    window.location.href="../TicketOperatore.html";
-} else if (ruolo === "Admin") {
-    window.location.href="Admin.html";
-}
-
-// funzione per caricare i ticket associati all'id
+const ruolo = localStorage.getItem("ruolo");
 async function createTicket() {
     const URL = `http://localhost:8080/ticket`;
     const token = localStorage.getItem("authToken");
