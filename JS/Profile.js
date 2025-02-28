@@ -25,7 +25,7 @@ function loadProfile(){
         console.error("Errore durante il caricamento del profilo:", error);
     });
 }
-
+// update
 function updateRole(role){
     if(role === "Operatore"){
         document.getElementById("ticket-btn").style.display = "inline";
