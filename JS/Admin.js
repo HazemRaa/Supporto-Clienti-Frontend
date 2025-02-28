@@ -1,7 +1,7 @@
 
 
 const token = localStorage.getItem("authToken");
-const ruolo = localStorage.getItem("ruolo");
+const ruolo = localStorage.getItem("userRole");
 
 /*
 if (token === null) {
