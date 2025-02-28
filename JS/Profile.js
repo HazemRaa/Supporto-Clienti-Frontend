@@ -1,4 +1,3 @@
-
 function loadProfile(){
     const token = localStorage.getItem("authToken");
 
@@ -17,15 +16,32 @@ function loadProfile(){
     })
     .then((data) => {
         console.log(data);
-        document.getElementById("nome-edit").value = data.nome;
-        document.getElementById("cognome-edit").value = data.cognome;
-        document.getElementById("email-edit").value = data.email;
+        document.getElementById("nome-edit").textContent = data.nome;
+        document.getElementById("cognome-edit").textContent = data.cognome;
+        document.getElementById("email-edit").textContent = data.email;
     })
     .catch((error) => {
-       // window.location.href = "Login.html";
+        window.location.href = "Login.html";
         console.error("Errore durante il caricamento del profilo:", error);
     });
 }
+
+function updateRole(role){
+    if(role === "Operatore"){
+        document.getElementById("ticket-btn").style.display = "inline";
+        document.getElementById("btn-logout").style.display = "inline"
+        document.getElementById("edit-btn").style.display = "none";
+        document.getElementById("delete-btn").style.display = "none";
+        ;
+    }else if (role === "Admin"){
+        document.getElementById("ticket-btn").style.display = "inline";
+        document.getElementById("delete-btn").style.display = "inline";
+        document.getElementById("btn-logout").style.display = "inline";
+        document.getElementById("edit-btn").style.display = "none";
+
+    }
+}
+
 loadProfile();
 
 // function per andare alla pagina miei tickets
@@ -41,11 +57,10 @@ function editProfile(){
     document.getElementById("password-edit").style.display="inline";
     document.getElementById("password").style.display="inline";
 
-    document.getElementById("save-btn").style.display="inline";
-    document.getElementById("ticket-btn").style.display="none";
-    document.getElementById("edit-btn").style.display="none";
-    document.getElementById("delete-btn").style.display="none";
-
+    document.getElementById("nome-edit").value=document.getElementById("nome").textContent;
+    document.getElementById("cognome-edit").value=document.getElementById("cognome").textContent;
+    document.getElementById("email-edit").value=document.getElementById("email").textContent;
+    document.getElementById("password-edit").value="";
 
     document.getElementById("nome-edit").disabled=false;
     document.getElementById("cognome-edit").disabled=false;
@@ -123,7 +138,14 @@ let updateUtente={};
    
 //eliminare l'account
 function deleteAccount() {
-    if (!confirm("Vuoi davvero eliminare l'account?")) return;
+    
+    if (!confirm("Vuoi davvero eliminare l'account?"))
+         return;
+    
+    if(role==="OPERATORE"){
+        alert("Non puoi eliminare l'account di un operatore!")
+        return;
+    }
 
     const token = localStorage.getItem("authToken");
     
@@ -161,6 +183,36 @@ function deleteAccount() {
             throw new Error("Errore durante il logout!")
         }else{
             window.alert("addio.")
+            window.location.href="home.html"
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+   
+}
+document.getElementById("btn-logout").addEventListener("click", function(event){
+    event.preventDefault();
+    logout();
+});
+
+    function logout()
+{
+     const token = localStorage.getItem("authToken");
+      
+    fetch("http://localhost:8080/logout", {
+        method: "GET", 
+        headers: { Authorization: `Bearer ${token}`,
+    },
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error("Errore durante il logout!")
+        }else{
+            window.alert("addio.")
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("userRole")
             window.location.href="home.html"
         }
     })

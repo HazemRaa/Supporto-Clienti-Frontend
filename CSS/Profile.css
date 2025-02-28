@@ -109,7 +109,8 @@ h1 {
 /* Pulsanti */
 .Ticket,
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.btn-logout {
     width: 100%; /* Occupa tutta la larghezza del contenitore */
     max-width: 500px; /* Impedisce che siano più larghi degli input */
     padding: 12px;
@@ -157,6 +158,16 @@ h1 {
     box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
+.btn-logout {
+    background: #000000;
+    color: white;
+}
+
+.btn-logout:hover {
+    background:  #000000;
+    border: 2px solid  #2b2b2b;
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
+}
 /* Responsive Design */
 @media (max-width: 480px) {
     .card-profile {

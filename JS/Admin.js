@@ -125,6 +125,31 @@ function aggiornaColoreBottone(stato_btn) {
     console.log("ciao");
 }
 
+// Recupera tutti i ticket
+function getAllTickets() {
+    fetch("http://localhost:8080/ticket", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${token}`,
+        }
+    })
+    
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Errore nel recupero dei ticket: " + response.status);
+        }
+        return response.json();
+    })
+    .then(tickets => {
+        console.log("Tickets recuperati:", tickets);
+        return tickets;
+    })
+    .catch(error => {
+        console.error("Errore nel recupero dei ticket:", error);
+        return [];
+    });
+}
 
 //Filtro
 document.addEventListener("DOMContentLoaded", function() {
