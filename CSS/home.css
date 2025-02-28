@@ -9,7 +9,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     color: #333;
-    line-height: 1.6;
+    line-height: 1.8;
     overflow-x: hidden;
     transition: background-color 0.3s ease;
     min-height: 100vh; 
@@ -18,11 +18,19 @@ body {
 }
 
 /* Header */
+
+.logo {
+    width: 60px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
 header {
     position: relative;
     background: linear-gradient(135deg, #ffcc00, #ff6a00);
     color: #fff;
-    padding: 80px 20px;
+    padding: 90px 20px 20px 20px;
     text-align: center;
     border-radius: 0 0 20px 20px;
     animation: fadeIn 1s ease-in-out;
@@ -95,10 +103,27 @@ header p {
     justify-content: flex-start; /* Opzionale: allinea orizzontalmente all'inizio */
   }
 
+  .intro {
+    width: 80%; 
+    max-width: 800px; 
+    margin: 40px auto; 
+    padding: 60px 30px 0px 30px;
+    text-align: center; 
+    font-size: 1.2em; 
+    line-height: 1.6; 
+    color: #333; 
+   
+}
+
+.intro span { 
+    padding: 2px 5px; 
+    border-radius: 3px; 
+    font-weight: bold; 
+}
 
 /* Sezione Apri Ticket */
 .open-ticket {
-    margin: 40px auto;
+    margin: 30px 40px 150px 40px;
     text-align: center;
 }
 

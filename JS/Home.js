@@ -77,3 +77,29 @@ function Redirect(ruolo) {
         window.location.href = "login.html";
     }
 }
+
+/* Gestione click footer */
+const ticketBtn = document.getElementById("footer-btn");
+const token = localStorage.getItem("authToken");
+   const ruolo = localStorage.getItem("userRole"); 
+   ticketBtn.addEventListener("click", () => {
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+  
+    RedirectFooter(ruolo);
+});
+
+function RedirectFooter(ruolo) {
+    if (ruolo === "Admin") {
+        window.location.href = "home.html";
+    } else if (ruolo === "Operatore") {
+        window.location.href = "home.html";
+    } else if (ruolo === "Utente") {
+        window.location.href = "InvioTicket.html";
+    } else {
+        console.warn("⚠️ Ruolo non riconosciuto, reindirizzamento al login...");
+        window.location.href = "login.html";
+    }
+}

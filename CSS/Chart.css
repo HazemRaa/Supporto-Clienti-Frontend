@@ -6,6 +6,14 @@ body {
   min-height: 100vh;
 }
 
+
+.logo {
+  width: 60px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
 canvas {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
@@ -83,6 +91,7 @@ canvas {
   display: flex;
   align-items: center; /* Opzionale: allinea verticalmente al centro */
   justify-content: flex-start; /* Opzionale: allinea orizzontalmente all'inizio */
+  position: relative;
 }
 
 header {

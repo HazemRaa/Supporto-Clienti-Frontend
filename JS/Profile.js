@@ -5,8 +5,8 @@ function loadProfile(){
 
     fetch("http://localhost:8080/utenti", {
         method:"GET",
-        headers:headers,
-       
+        headers: headers
+
     })
     .then((response)=> {
         if(!response.ok) {
@@ -19,19 +19,58 @@ function loadProfile(){
         document.getElementById("nome-edit").value = data.nome;
         document.getElementById("cognome-edit").value = data.cognome;
         document.getElementById("email-edit").value = data.email;
-    })
+
+    localStorage.setItem("userRole", data.ruolo);  
+
+    updateRole(data.ruolo);
+})
     .catch((error) => {
        window.location.href = "Login.html";
         console.error("Errore durante il caricamento del profilo:", error);
     });
 }
-loadProfile();
 
-// function per andare alla pagina miei tickets
-function goToTickets() {
-    window.location.href = "Ticket.html"; 
+
+// Mostra funzioni a seconda del ruolo
+function updateRole(ruolo){
+    if(ruolo === "Operatore"){
+        document.getElementById("ticket-btn").style.display = "inline";
+        document.getElementById("btn-logout").style.display = "inline";
+        document.getElementById("edit-btn").style.display = "none";
+        document.getElementById("delete-btn").style.display = "none";
+        
+    }else if (ruolo === "Admin"){
+        document.getElementById("ticket-btn").style.display = "inline";
+        document.getElementById("delete-btn").style.display = "none";
+        document.getElementById("btn-logout").style.display = "none";
+        document.getElementById("edit-btn").style.display = "none";
+
+    }
 }
 
+function goToTickets() {
+
+    const ruolo = localStorage.getItem("userRole");
+
+    if(ruolo === "Operatore"){
+        window.location.href = "../HTML/TicketOperatore.html"; 
+    } else if (ruolo === "Admin"){
+        window.location.href = "../HTML/Admin.html";
+    } else {
+        window.location.href = "../HTML/Ticket.html"; 
+    }
+}
+
+loadProfile();
+
+
+
+
+// function per andare alla pagina miei tickets
+
+
+
+// Funzione modifica profilo
 function editProfile(){
     // modificare il profilo 
     document.getElementById("nome-edit").style.display="inline";
@@ -66,14 +105,11 @@ let updateUtente={};
         const cognome=document.getElementById("cognome-edit").value.trim();
         const email=document.getElementById("email-edit").value.trim();
         const password=document.getElementById("password-edit").value.trim();
-   
-         updateUtente={nome, cognome, email};  
 
-        if(password) updateUtente.password=password;   
-        
-   
-    
-    fetch("http://localhost:8080/utenti", {
+         updateUtente={nome, cognome, email};
+
+        if(password) updateUtente.password=password;
+fetch("http://localhost:8080/utenti", {
         method: "PUT",
         headers: {
         "Content-Type": "application/json",
@@ -97,7 +133,7 @@ let updateUtente={};
         document.getElementById("cognome-edit").textContent = data.cognome;
         document.getElementById("email-edit").textContent = data.email;
 
-    
+
         document.getElementById("nome-edit").style.display = "inline";
         document.getElementById("cognome-edit").style.display = "inline";
         document.getElementById("email-edit").style.display = "inline";
@@ -115,18 +151,26 @@ let updateUtente={};
 
 
 })
-
-    .catch((error) => {
+.catch((error) => {
     console.error("Errore durante l'aggiornamento del profilo:", error);
     });
  }
+
+
    
 //eliminare l'account
 function deleteAccount() {
-    if (!confirm("Vuoi davvero eliminare l'account?")) return;
+
+    if (!confirm("Vuoi davvero eliminare l'account?"))
+         return;
+
+    if(role==="OPERATORE"){
+        alert("Non puoi eliminare l'account di un operatore!")
+        return;
+    }
 
     const token = localStorage.getItem("authToken");
-    
+
     fetch("http://localhost:8080/utenti", {
         method: "DELETE",
         headers: {
@@ -147,14 +191,17 @@ function deleteAccount() {
     });
 }
 
-    function logout()
+
+// Funzione log out
+function logout()
 {
      const token = localStorage.getItem("authToken");
-      
+
     fetch("http://localhost:8080/logout", {
-        method: "GET", 
-        headers: { Authorization: `Bearer ${token}`,
-    },
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     })
     .then(response => {
         if(!response.ok){
@@ -170,7 +217,7 @@ function deleteAccount() {
         console.error(error);
     });
 
-   
+
 }
 document.getElementById("btn-logout").addEventListener("click", function(event){
     event.preventDefault();

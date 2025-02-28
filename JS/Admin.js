@@ -1,108 +1,85 @@
+// Caricare i ticket quando la pagina si carica
+document.addEventListener("DOMContentLoaded", function () {
+    createTicket();
+});
 
 
 const token = localStorage.getItem("authToken");
-const ruolo = localStorage.getItem("userRole");
 
-/*
-if (token === null) {
-    window.location.href="login.html";
-} else if (ruolo != "Admin") {
-    window.location.href="home.html";
-}
-*/
+// Funzione per caricare e mostrare tutti i ticket
+function createTicket() {
+    const tbody = document.getElementById("tbody");
 
-/* Prende l'id dell'utente e il token
-prende gli id ticket
-stampa i dettagli dell'id ticket
-ripete per ogni ticket presente
-*/
-// funzione per caricare i ticket associati all'id
-async function createTicket() {
-    const URL = `http://localhost:8080/ticket`;
-    const ruolo = localStorage.getItem("ruolo");
-
-    try {
-        const response = await fetch(URL, {
-            headers: {
-                "Authorization" : "6ad0c906-8dff-4916-9150-0958d7111fac"
-            }
-        });
-        if (!response.ok) {
-            throw new Error("Errore nel recupero dei ticket");
-          }
-    const dati = await response.json();
-       
-var num = 1;
-  dati.forEach (ticket => {
-        const numero = document.createElement("th");
-        numero.id = "id_ticket"+ ticket.id;
-        numero.textContent = ticket.id;
-
-        const tr = document.createElement("tr");
-        tr.id = "riga"+ ticket.id;
-
-        const utente = document.createElement("td");
-        utente.id = "utente_ticket"+ ticket.id;
-        utente.textContent = ticket.utente.email;
-
-        const operatore = document.createElement("td");
-        operatore.id = "operatore_ticket"+ ticket.id;
-        operatore.textContent = utente.nome + " " + utente.cognome;
-
-        const data_ap = document.createElement("td");
-        data_ap.id = "data_ticket_ap"+ ticket.id;
-        data_ap.textContent = ticket.data_chiusura;
-        data_ap.classList.add("data-tb");
-
-        const data_chi = document.createElement("td");
-        data_chi.id = "data_ticket_chi"+ ticket.id;
-        data_chi.textContent = ticket.data_apertura;
-        data_chi.classList.add("data-tb");
-
-        const oggetto = document.createElement("td");
-        oggetto.id = "oggetto_ticket"+ ticket.id;
-        oggetto.textContent = ticket.oggetto;
-        
-        console.log(ticket.oggetto);
-        console.log(ticket);
-       
-        tr.appendChild(numero);
-        tr.appendChild(utente);
-        tr.appendChild(data_ap);
-        tr.appendChild(data_chi);
-        tr.appendChild(oggetto);
-
-        //Aggiunta bottone
-        
-            const stato = document.createElement("select");
-            const bottoncino = document.getElementById("bottoncino");
-          
-            stato.id = "stato_ticket"+ ticket.id;
-            stato.classList.add("btn", "btn-primary", "stato");
-          
-            const stati = ["NUOVO", "APERTO", "VISUALIZZATO", "IN_LAVORAZIONE", "CHIUSO"];
-          
-            stati.forEach(status => {
-              const stato_btn = document.createElement("option");
-              stato_btn.value = status;
-              stato_btn.textContent = status;
-              stato.appendChild(stato_btn);
-            });
-          
-            stato.value = ticket.status;
-          
-            bottoncino.appendChild(stato);
-            tr.appendChild(bottoncino);
-          
-   });
-
-  } catch (error) {
-    console.error("Errore:", error);
+    getAllTickets().then(tickets => {
+        tickets.forEach(ticket => {
     
-  }
-}
-createTicket();
+            
 
+            const tr = document.createElement("tr");
+            tr.id = "riga" + ticket.id;
+
+            const numero = document.createElement("th");
+            numero.textContent = ticket.id;
+
+            const utente = document.createElement("td");
+            utente.textContent = ticket.utente.email;
+
+            const operatore = document.createElement("td");
+            operatore.textContent = ticket.operatore ? ticket.operatore.nome + " " + ticket.operatore.cognome : "Nessun operatore";
+
+            const data_ap = document.createElement("td");
+            data_ap.textContent = ticket.dataApertura;
+
+            const data_chi = document.createElement("td");
+            data_chi.textContent = ticket.dataChiusura;
+
+            const oggetto = document.createElement("td");
+            oggetto.textContent = ticket.oggetto;
+
+            tr.appendChild(numero);
+            tr.appendChild(utente);
+            tr.appendChild(operatore);
+            tr.appendChild(data_ap);
+            tr.appendChild(data_chi);
+            tr.appendChild(oggetto);
+
+            // Aggiunta bottone
+            const stato = document.createElement("td");
+            const stato_btn = document.createElement("button");
+            stato.id = "stato_ticket" + ticket.id;
+            stato_btn.classList.add("btn", "btn-primary", "stato");
+            stato_btn.textContent = ticket.status;
+            stato.appendChild(stato_btn);
+            tr.appendChild(stato);
+            aggiornaColoreBottone(stato_btn);
+
+            const tbody = document.getElementById("tbody");
+            tbody.appendChild(tr);
+        });
+    });
+}
+
+// Funzione per ottenere tutti i ticket dal server
+function getAllTickets() {
+    return fetch("http://localhost:8080/ticket", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Errore durante il caricamento dei ticket");
+        }
+        return response.json();
+    })
+    .catch(error => {
+        
+        console.error("Errore:", error);
+        document.getElementById("error-message").textContent = "Impossibile caricare i ticket. Riprova più tardi.";
+        return []; 
+    });
+}
 
 
 //colori per bottone
@@ -121,8 +98,6 @@ function aggiornaColoreBottone(stato_btn) {
         stato_btn.style.backgroundColor = "gray";
         stato_btn.style.borderColor = "gray";
     }
-    console.log(stato_btn);
-    console.log("ciao");
 }
 
 
