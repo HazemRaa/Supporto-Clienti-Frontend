@@ -164,7 +164,7 @@ function deleteAccount() {
     if (!confirm("Vuoi davvero eliminare l'account?"))
          return;
 
-    if(role==="OPERATORE"){
+    if(ruolo==="Operatore"){
         alert("Non puoi eliminare l'account di un operatore!")
         return;
     }
