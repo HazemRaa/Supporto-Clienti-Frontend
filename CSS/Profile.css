@@ -61,15 +61,19 @@ h1 {
 /* Pulsanti */
 .Ticket,
 .edit-btn,
-.delete-btn {
-    width: 100%;
-    padding: 10px;
+.delete-btn,
+.btn-logout {
+    width: 100%; /* Occupa tutta la larghezza del contenitore */
+    max-width: 500px; /* Impedisce che siano più larghi degli input */
+    padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
     margin-top: 10px;
+    display: block; /* Assicura che siano allineati verticalmente */
+    text-align: center;
 }
 
 .Ticket {
@@ -79,15 +83,20 @@ h1 {
 
 .Ticket:hover {
     background: #ff6a00;
+    border: 2px solid rgb(230, 173, 74);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .edit-btn {
     background: #28a745;
     color: white;
+
 }
 
 .edit-btn:hover {
     background: #218838;
+    border: 2px solid rgb(0, 130, 63);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
 .delete-btn {
@@ -97,8 +106,20 @@ h1 {
 
 .delete-btn:hover {
     background: #c82333;
+    border: 2px solid rgb(255, 0, 0);
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
 }
 
+.btn-logout {
+    background: #000000;
+    color: white;
+}
+
+.btn-logout:hover {
+    background:  #000000;
+    border: 2px solid  #2b2b2b;
+    box-shadow: 5px 5px 0px rgb(255, 255, 255);
+}
 /* Responsive Design */
 @media (max-width: 480px) {
     .card-profile {

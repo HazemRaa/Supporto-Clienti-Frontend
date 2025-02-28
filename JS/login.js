@@ -43,11 +43,15 @@ if(token != null){
             localStorage.setItem("authToken", data.token);  // se esiste viene salavato nel localStorage e potra essere usato per mantenere l'utente connesso
             localStorage.setItem("userRole", data.role); //se esiste viene salavato nel localStorage e potra essere usato per mantenere Admin connesso
         if(data.role === "Admin"){                         // se tutto okay come admin, va al Admin home, altrimenti va alla pagina home utente
+<<<<<<< HEAD
             window.location.href="Admin.html";
+=======
+            window.location.href="../HTML/Admin.html";
+>>>>>>> 8f9a99accf2064a7800da378e252b5e9e1725439
         }else if (data.role === "Utente"){
-            window.location.href="home.html";
+            window.location.href="../HTML/Profile.hmtl";
         } else {
-            window.location.href = "TicketOperatore.html";
+            window.location.href = "../HTML/Profile.hmtl";
         }
 
         }else{
