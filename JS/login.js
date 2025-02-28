@@ -5,7 +5,8 @@ const token =localStorage.getItem("authToken");
 if(token != null){
     window.location.href="home.html";
                                                                     // recuperare il token e controlla che l'utente esiste, viene reindrizzato al homepage.
-}
+
+                                                                }
 
     document.getElementById("loginForm").addEventListener("submit", (event) =>{
         event.preventDefault();                                     // Impedisce il refresh della pagina
