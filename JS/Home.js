@@ -1,5 +1,8 @@
+
+
 //Recupero categorie ticket inserite in database
 document.addEventListener("DOMContentLoaded", async () => {
+    
     const categoryContainer = document.getElementById("categoryContainer");
 
     const descriptions = {
@@ -38,7 +41,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             categoryContainer.appendChild(categoryElement);
         });
+        
     } catch (error) {
         console.error("Errore nel recupero delle categorie:", error);
     }
+
+   /* Gestione pulsante ticket */
+   const ticketBtn = document.getElementById("ticket-btn");
+   const token = localStorage.getItem("authToken");
+   const ruolo = localStorage.getItem("userRole"); 
+   console.log(`Ruolo ricevuto: '${ruolo}'`);
+   ticketBtn.addEventListener("click", () => {
+       if (!token) {
+           window.location.href = "login.html";
+           return;
+       }
+     
+       Redirect(ruolo);
+   });
 });
+
+
+function Redirect(ruolo) {
+    if (ruolo === "Admin") {
+        window.location.href = "Admin.html";
+    } else if (ruolo === "Operatore") {
+        window.location.href = "/TicketOperatore.html";
+    } else if (ruolo === "Utente") {
+        window.location.href = "Ticket.html";
+    } else {
+        console.warn("⚠️ Ruolo non riconosciuto, reindirizzamento al login...");
+        window.location.href = "login.html";
+    }
+}
