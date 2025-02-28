@@ -1,10 +1,25 @@
+const token = localStorage.getItem("authToken");
+if (!token) {
+  window.location.href = "home.html"
+}
+
 function showGraph() {
   const ctx = document.getElementById("myChart");
 
-  fetch("http://localhost:8080/ticket/data")
-    .then((response) => response.json())
+  fetch("http://localhost:8080/ticket/data", {
+    headers: {
+      "Authorization": token
+    }
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          return Promise.reject(data);
+        });
+      }
+      return response.json();
+    })
     .then((result) => {
-      console.log(result);
       let delayed;
       const config = {
         type: "bar",
@@ -77,7 +92,7 @@ function showGraph() {
       new Chart(ctx, config);
     })
     .catch((error) => {
-      console.log(error);
+      window.location.href = "home.html"
     });
 }
 showGraph();
