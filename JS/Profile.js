@@ -42,7 +42,7 @@ function updateRole(ruolo){
     }else if (ruolo === "Admin"){
         document.getElementById("ticket-btn").style.display = "inline";
         document.getElementById("delete-btn").style.display = "none";
-        document.getElementById("btn-logout").style.display = "none";
+        document.getElementById("btn-logout").style.display = "inline";
         document.getElementById("edit-btn").style.display = "none";
 
     }
@@ -140,6 +140,7 @@ fetch("http://localhost:8080/utenti", {
         document.getElementById("ticket-btn").style.display="inline";
         document.getElementById("edit-btn").style.display="inline";
         document.getElementById("delete-btn").style.display="inline";
+        document.getElementById("btn-logout").style.display="inline";
         document.getElementById("password-edit").style.display = "none";
         document.getElementById("password").style.display="none";
         document.getElementById("save-btn").style.display = "none";
@@ -157,20 +158,20 @@ fetch("http://localhost:8080/utenti", {
  }
 
 
-   
+ 
 //eliminare l'account
 function deleteAccount() {
-
+   
+    console.log(token + ruolo);
     if (!confirm("Vuoi davvero eliminare l'account?"))
          return;
 
-    if(ruolo==="Operatore"){
+    if(ruolo==="OPERATORE"){
         alert("Non puoi eliminare l'account di un operatore!")
         return;
     }
 
-    const token = localStorage.getItem("authToken");
-
+   
     fetch("http://localhost:8080/utenti", {
         method: "DELETE",
         headers: {
@@ -207,7 +208,6 @@ function logout()
         if(!response.ok){
             throw new Error("Errore durante il logout!")
         }else{
-            window.alert("addio.")
             localStorage.removeItem("authToken");
             localStorage.removeItem("userRole")
             window.location.href="home.html"

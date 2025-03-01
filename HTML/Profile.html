@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../CSS/Base.css">
    <link rel="stylesheet" href="../CSS/Profile.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -14,15 +15,15 @@
 <body>
     <!-- Profilo e Home-->
     <header>
+        <img src="/logo.png" class="logo">
         <div class="header-btn" style="display: flex; align-items: center; justify-content: flex-start;">
-            <a href="../HTML/Home.html"><i class="fa-solid fa-house home-button" style="margin-right: 10px;"></i></a>
+            <a href="../HTML/home.html"><i class="fa-solid fa-house home-button" style="margin-right: 10px;"></i></a>
             <a href="../HTML/Profile.html"><i class="fas fa-user-circle avatar" style="margin-right: 10px;"></i></a>
           </div>
     </header>
     
     <div class="card-profile"> 
-
-        <h1>Profile</h1>
+      <h1>Profilo</h1>
 
             <div class="profile">
 
@@ -44,7 +45,7 @@
                 <button class="Ticket" id="ticket-btn" onclick="goToTickets()">I miei ticket</button>
                 <button class="edit-btn" id="edit-btn" onclick="editProfile()">Modifica Profilo</button>
                 <button class="edit-btn" id="save-btn"  onclick="saveProfile()" style="display: none;" >Salva</button>
-                <button class = "btn-logout" id="btn-logout" onclick="logout()">Logout</button>
+                <button href="../HTML/home.html" id="btn-logout" class="btn-logout">Logout</button>
                 <button class="delete-btn" id="delete-btn" onclick="deleteAccount()">Elimina Profilo</button>
 
 
@@ -52,6 +53,7 @@
 
     </div>
     <script src="../JS/Profile.js" defer></script>
+    
    
 
 </body>

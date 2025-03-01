@@ -87,9 +87,11 @@ function aggiornaColoreBottone(stato_btn) {
     if (stato_btn.innerHTML === "APERTO") {
         stato_btn.style.backgroundColor = "red";
         stato_btn.style.borderColor = "red";
+        stato_btn.style.color = "white";
     } else if (stato_btn.innerHTML === "VISUALIZZATO") {
         stato_btn.style.backgroundColor = "blue";
         stato_btn.style.borderColor = "blue";
+        stato_btn.style.color = "white";
     } else if (stato_btn.innerHTML === "IN_LAVORAZIONE") {
         stato_btn.style.backgroundColor = "yellow";
         stato_btn.style.borderColor = "yellow";
@@ -97,6 +99,7 @@ function aggiornaColoreBottone(stato_btn) {
     } else if (stato_btn.innerHTML === "CHIUSO") {
         stato_btn.style.backgroundColor = "gray";
         stato_btn.style.borderColor = "gray";
+        stato_btn.style.color = "white";
     }
 }
 

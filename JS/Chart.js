@@ -96,3 +96,16 @@ function showGraph() {
     });
 }
 showGraph();
+
+
+document.getElementById("exportPDF").addEventListener("click", () => {
+  const canvas = document.getElementById("myChart");
+  const image = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.text("Andamento Mensile dei Ticket", 10, 10);
+  doc.addImage(image, "PNG", 10, 20, 180, 100);
+  doc.save("chart_data.pdf");
+});
