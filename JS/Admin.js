@@ -17,6 +17,8 @@ function createTicket() {
 
             const tr = document.createElement("tr");
             tr.id = "riga" + ticket.id;
+            tr.addEventListener("click", () => apriPopup(ticket.id, ticket.idCategoria, ticket.oggetto, ticket.messaggio.corpoUtente, ticket.messaggio.corpoOperatore));
+
 
             const numero = document.createElement("th");
             numero.textContent = ticket.id;
@@ -58,6 +60,53 @@ function createTicket() {
         });
     });
 }
+
+function apriPopup(ticketId, idCategoria, oggetto, messaggioUtente, messaggioOperatore) {
+    console.log("Apri popup per il ticket:", ticketId);
+    
+    const esistente = document.getElementById("popup-messaggio");
+    if (esistente) esistente.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "popup-messaggio";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0, 0, 0, 0.5)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "1000";
+
+    const popupBody = document.createElement("div");
+    popupBody.style.background = "#ffaa00";
+    popupBody.style.padding = "20px";
+    popupBody.style.borderRadius = "10px";
+    popupBody.style.width = "600px";
+    popupBody.style.textAlign = "center";
+    popupBody.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.3)";
+    popupBody.style.position = "relative";
+
+    popupBody.innerHTML = `
+        <button class="popup-close" style="position: absolute; top: 10px; right: 10px; border: none; background: none; font-size: 20px; cursor: pointer;">×</button>
+        <h2>Dettagli Ticket</h2>
+        <div style="text-align: left; background: white; padding: 10px; border-radius: 5px; margin-bottom: 10px; color: black; word-wrap: break-word; overflow-wrap: break-word;">
+            <strong>Oggetto:</strong> ${oggetto || "N/A"} <br>
+            <strong>Messaggio Utente:</strong> ${messaggioUtente} <br>
+            <strong>Messaggio Operatore:</strong> ${messaggioOperatore || "Nessuna risposta operatore"}
+        </div>
+    `;
+
+    overlay.appendChild(popupBody);
+    document.body.appendChild(overlay);
+
+    document.querySelector(".popup-close").onclick = () => overlay.remove();
+}
+
+createTicket();
+
 
 // Funzione per ottenere tutti i ticket dal server
 function getAllTickets() {

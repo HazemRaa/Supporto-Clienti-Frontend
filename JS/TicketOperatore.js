@@ -85,6 +85,10 @@ stati.forEach(status => {
 
 selectStato.value = ticket.status;
 
+if (ticket.status == "CHIUSO") {
+    selectStato.disabled = true;
+}
+
 
 
 th.appendChild(selectStato);

@@ -160,13 +160,14 @@ fetch("http://localhost:8080/utenti", {
 
  
 //eliminare l'account
-function deleteAccount() {
+function deleteAccount(ruolo) {
+    const token = localStorage.getItem("authToken");
    
     console.log(token + ruolo);
     if (!confirm("Vuoi davvero eliminare l'account?"))
          return;
 
-    if(ruolo==="OPERATORE"){
+    if(ruolo==="Operatore"){
         alert("Non puoi eliminare l'account di un operatore!")
         return;
     }

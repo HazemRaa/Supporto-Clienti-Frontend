@@ -97,3 +97,31 @@ canvas {
 header {
   margin-bottom: 100px;
 }
+
+
+#exportPDF {
+  margin: 30px 40px 150px 40px;
+  text-align: center;
+  margin-top: 8%;
+  margin-left: 43%;
+}
+
+.exportPDF-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #52abe3;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.exportPDF-btn i {
+  margin-right: 10px;
+}
+
+.exportPDF-btn:hover {
+  background-color: #4690bf;
+  transform: scale(1.1);
+}

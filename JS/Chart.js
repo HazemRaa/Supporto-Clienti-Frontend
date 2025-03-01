@@ -97,7 +97,6 @@ function showGraph() {
 }
 showGraph();
 
-
 document.getElementById("exportPDF").addEventListener("click", () => {
   const canvas = document.getElementById("myChart");
   const image = canvas.toDataURL("image/png");
