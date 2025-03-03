@@ -1,4 +1,7 @@
-/* Background generale */
+/* Importa il font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Background generale con animazione */
 body {
     margin: 0;
     padding: 0;
@@ -9,16 +12,45 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Animazione del background */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Contenitore principale */
 .container {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px; /* Padding uniforme su tutti i lati */
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     width: 350px;
     text-align: center;
+    transform: translateY(-20px);
+    animation: slideIn 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+/* Animazione container */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Titolo */
@@ -32,39 +64,81 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra gli elementi del form */
-    width: 100%; /* Occupa tutta la larghezza del container */
+    align-items: center;
+    width: 100%;
 }
 
 /* Input stile */
 input[type="text"],
 input[type="password"] {
-    width: calc(100% - 30px); /* Larghezza piena meno il padding */
-    padding: 10px 15px;
-    margin: 10px 0; /* Spaziatura verticale */
+    width: calc(100% - 30px);
+    padding: 12px 15px;
+    margin: 10px 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: #f1f1f1;
     color: #333;
     font-size: 16px;
+    transition: 0.3s ease-in-out;
 }
 
-/* Bottone */
+/* Effetto focus sugli input */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+}
+
+/* Bottone login */
 button {
-    width: calc(100% - 30px); /* Larghezza piena meno il padding */
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: #ffaa00;
-    color: white;
+    color: #fff;
     font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 10px; /* Spaziatura superiore */
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 button:hover {
-    background: #ff6a00;
+    background: #ff8800;
+    transform: scale(1.05);
+}
+
+/* Bottone Login con stile della home */
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffcc00;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.login-button i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.login-button:hover {
+    background-color: #ffcc00;
+    color: #333;
+    transform: scale(1.1);
 }
 
 /* Link registrazione */
@@ -76,33 +150,12 @@ p {
 p a {
     color: #ffaa00;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
 }
 
 p a:hover {
     color: #ff6a00;
-}
-
-/* Pulsante Home */
-.home-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.btn-home {
-    background: #ffaa00;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-home:hover {
-    background: #ff6a00;
 }
 
 /* Footer */
@@ -113,4 +166,5 @@ footer {
     text-align: center;
     color: #fff;
     font-size: 12px;
+    animation: fadeIn 1.5s ease-in-out;
 }
