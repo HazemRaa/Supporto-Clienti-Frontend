@@ -127,6 +127,8 @@ fetch("http://localhost:8080/utenti", {
 
     .then((data) => {
     console.log("Profilo aggiornato con successo:", data);
+    window.alert("Profilo aggiornato con successo!");
+
 
 
         document.getElementById("nome-edit").textContent = data.nome;

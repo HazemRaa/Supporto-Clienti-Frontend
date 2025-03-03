@@ -40,12 +40,12 @@ var num = 1;
 
         const data_ap = document.createElement("td");
         data_ap.id = "data_ticket_ap"+ ticket.id;
-        data_ap.textContent = ticket.dataApertura;
+        data_ap.textContent = convertToItalianDate(ticket.dataApertura);
         data_ap.classList.add("data-tb");
 
         const data_chi = document.createElement("td");
         data_chi.id = "data_ticket_chi"+ ticket.id;
-        data_chi.textContent =ticket.dataChiusura;
+        data_chi.textContent = convertToItalianDate(ticket.dataChiusura);
         data_chi.classList.add("data-tb");
 
         const oggetto = document.createElement("td");
@@ -107,32 +107,24 @@ aggiornaColoreBottone(selectStato);
 
 
 //colori per bottone
-function aggiornaColoreBottone(selectStato) {
-    const id = selectStato.id; 
-    const stato = document.getElementById(id); 
-
-    if (stato) {
-        if (stato.value === "APERTO") {
-            stato.style.backgroundColor = "red";
-            stato.style.borderColor = "red";
-            stato.style.color = "white";
-        } else if (stato.value === "VISUALIZZATO") {
-            stato.style.backgroundColor = "blue";
-            stato.style.borderColor = "blue";
-            stato.style.color = "white";
-        } else if (stato.value === "IN_LAVORAZIONE") {
-            stato.style.backgroundColor = "yellow";
-            stato.style.borderColor = "yellow";
-            stato.style.color = "black";
-        } else if (stato.value === "CHIUSO") {
-            stato.style.backgroundColor = "gray";
-            stato.style.borderColor = "gray";
-            stato.style.color = "white";
-        } else {
-            stato.style.backgroundColor = "";
-            stato.style.borderColor = "";
-            stato.style.color = "";
-        }
+function aggiornaColoreBottone(stato_btn) {
+    if (stato_btn.innerHTML === "APERTO") {
+        stato_btn.style.backgroundColor = "red";
+        stato_btn.style.borderColor = "red";
+        stato_btn.style.color = "white";
+    } else if (stato_btn.innerHTML === "VISUALIZZATO") {
+        stato_btn.style.backgroundColor = "blue";
+        stato_btn.style.borderColor = "blue";
+        stato_btn.style.color = "white";
+    } else if (stato_btn.innerHTML === "IN_LAVORAZIONE") {
+        stato_btn.style.backgroundColor = "yellow";
+        stato_btn.style.borderColor = "yellow";
+        stato_btn.style.color = "black";
+        stato_btn.innerHTML = "IN LAVORAZIONE";
+    } else if (stato_btn.innerHTML === "CHIUSO") {
+        stato_btn.style.backgroundColor = "gray";
+        stato_btn.style.borderColor = "gray";
+        stato_btn.style.color = "white";
     }
 }
     
@@ -394,6 +386,15 @@ async function modificaStato(idTicket, num, idCategoria, messaggio) {
     });
 }
 
+
+function convertToItalianDate(dataStringata) {
+    if (!dataStringata) {
+        return null;
+    }
+    const date = new Date(dataStringata);
+    const formatter = date.toLocaleDateString('it-IT');
+    return formatter;
+}
 
 
     

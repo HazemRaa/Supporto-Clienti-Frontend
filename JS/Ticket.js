@@ -36,12 +36,12 @@ async function createTicket() {
 
             const data_ap = document.createElement("td");
             data_ap.id = "data_ticket_ap" + ticket.id;
-            data_ap.textContent = ticket.dataApertura;
+            data_ap.textContent = convertToItalianDate(ticket.dataApertura);
             data_ap.classList.add("data-tb");
 
             const data_chi = document.createElement("td");
             data_chi.id = "data_ticket_chi" + ticket.id;
-            data_chi.textContent = ticket.dataChiusura;
+            data_chi.textContent = convertToItalianDate(ticket.dataChiusura);
             data_chi.classList.add("data-tb");
 
             const oggetto = document.createElement("td");
@@ -136,6 +136,7 @@ function aggiornaColoreBottone(stato_btn) {
         stato_btn.style.backgroundColor = "yellow";
         stato_btn.style.borderColor = "yellow";
         stato_btn.style.color = "black";
+        stato_btn.innerHTML = "IN LAVORAZIONE";
     } else if (stato_btn.innerHTML === "CHIUSO") {
         stato_btn.style.backgroundColor = "gray";
         stato_btn.style.borderColor = "gray";
@@ -173,3 +174,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
+function convertToItalianDate(dataStringata) {
+    if (!dataStringata) {
+        return null;
+    }
+    const date = new Date(dataStringata);
+    const formatter = date.toLocaleDateString('it-IT');
+    return formatter;
+}
